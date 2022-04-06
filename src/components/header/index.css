@@ -1,0 +1,36 @@
+/*页首导航背景*/
+.header{
+    background-color:#1e1f20;
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 30px;
+    margin:auto;
+    z-index: 3000;
+}
+
+.heade-nav{
+    margin-left: 20px;
+    width: 70%;
+display: inline-block;
+}
+
+
+/* 搜索框 */
+.search {
+	width: 100%;
+	height: 50px;
+	border: none;
+	margin-top: 14px;
+    margin-right: 20px;
+	position: relative;
+    border-radius: 50em;
+}
+
+
+
+
+
+
+

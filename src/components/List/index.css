@@ -1,0 +1,39 @@
+/* 左侧内容区 */
+.oneList {
+	width: 70%;
+	height: 750px;
+	/*border: 1px solid #333;*/
+	float: right;
+	
+
+}
+
+/* 右侧展示区 */
+/* 热门阅读 */
+.twoList {
+	width: 20%;
+	height: 400px;
+    float: left;
+}
+
+
+/* 两个列表及其标题 */
+.AllList {
+	margin-top: 0px;
+	
+}
+
+.oneList {
+	margin-right: 20px;
+}
+
+
+
+
+
+
+
+
+
+
+

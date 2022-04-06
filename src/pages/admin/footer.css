@@ -1,0 +1,61 @@
+.pag_foot{
+    background-color:#070707;
+    position: static;
+    bottom: 0;
+    width: 100%;
+    height: 150px;
+    margin:auto;
+    line-height:20px;
+    text-align:center;font-size:13px;color:#fff;
+}
+
+.left{
+    float: left;
+    margin-left: 100px ;
+}
+.aboutAs{
+    float: left;
+    padding-left: -140px;
+    border-bottom: 2px solid #900b09;
+}
+.statement{
+    padding-top: 50px;
+    padding-left: -200px;
+    
+}
+
+
+.pag_foot li{
+    text-align: left;
+}
+
+.col1{
+    width: 1000px;
+	height: 60px;
+	float:left;
+	margin-left: 800px;
+	margin-top: -20px;
+	position: absolute;
+}
+
+.col2{
+    width: 1000px;
+	height: 60px;
+	float:left;
+	margin-left: 950px;
+	margin-top: -20px;
+	position: absolute;
+}
+
+.col3{
+    width: 1000px;
+	height: 60px;
+	float:left;
+	margin-left: 1100px;
+	margin-top: -20px;
+	position: absolute;
+}
+
+.footTitle{
+	margin-top: 10px;
+}
