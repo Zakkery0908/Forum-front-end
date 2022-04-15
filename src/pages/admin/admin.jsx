@@ -57,7 +57,7 @@ class Admin extends Component {
         </div>
         <div class="left">
             <div class = "aboutAs">
-                <p>关于我们</p>
+                <p>关于我们a</p>
             </div>
             <div class = "statement"> 
                 <p>本平台是由CPT202小组成员自主开发的西浦校内在线学习交流平台</p>

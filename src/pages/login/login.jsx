@@ -66,13 +66,13 @@ class Login extends React.Component {
 //await必须写在async函数当中，如果await右边的promise是失败的
         const Demo = () => {
             const onFinish = async (values) => {
-                const {username, password, email, major} = values
-                let result = await reqAddUser(username, password, email, major)
+                const {username, password, email, major,gender,grade} = values
+                let result = await reqAddUser(username, password, email, major,gender,grade)
                 console.log(result)
                 if (result.code === 200) {
-                    message.success('register successfully')
+                    message.success('注册成功!!!!')
                 } else {
-                    message.error('sorry,there\'s something wrong')
+                    message.error('注册有点问题!!!!')
                 }
                 this.setState({show: 0})
             };
@@ -159,6 +159,32 @@ class Login extends React.Component {
                     >
                         <Input/>
                     </Form.Item>
+
+                    <Form.Item
+                        name='gender'
+                        label="gender"
+                        rules={[
+                            {
+                                required: true,
+                            },
+                        ]}
+                    >
+                        <Input/>
+                    </Form.Item>
+
+
+                    <Form.Item
+                        name='grade'
+                        label="grade"
+                        rules={[
+                            {
+                                required: true,
+                            },
+                        ]}
+                    >
+                        <Input/>
+                    </Form.Item>
+                    
                     <Form.Item wrapperCol={{...layout.wrapperCol, offset: 8}}>
                         <Button type="primary" htmlType="submit">
                             submit
@@ -195,7 +221,10 @@ class Login extends React.Component {
                 } else {
                     storageUtils.removeUserName()
                 }
+                
             };
+    
+            
 
             return (
                 <Form
@@ -275,6 +304,7 @@ class Login extends React.Component {
                 <section className='login-content'>
                     <h2><UserOutlined />XJTLU </h2>
                     {NormalLoginForm()}
+                    
                 </section>
                 <footer>
         

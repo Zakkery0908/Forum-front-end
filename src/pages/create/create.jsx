@@ -62,20 +62,20 @@ export default class create extends Component {
 
 
       <Form.Item
-        name={['user', 'name']}
+        name="title"
         label="Title">
         <Input />
       </Form.Item>
 
 
       <Form.Item
-        name={['user', 'email']}
+        name="description"
         label="Description" >
         <Input />
       </Form.Item>
 
 
-      <Form.Item label="Cascader">
+      <Form.Item  name="major" label="Major">
         <Cascader
           options={[
             {
@@ -100,7 +100,7 @@ export default class create extends Component {
         />
       </Form.Item>
      
-      <Form.Item name={['user', 'introduction']} label="Content">
+      <Form.Item name="content" label="Content">
         <Input.TextArea />
       </Form.Item>
 

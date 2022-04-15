@@ -14,16 +14,18 @@ axios.interceptors.request.use(config => {
     }
     return config;
 }, error => {
-    console.log('报错了')
+    console.log('发送失败了')
     Promise.reject(error);
 })
 
 
+
 //在数据返回来的时候 对数据做出处理再返回 看的是返回数据还是返回error
 axios.interceptors.response.use(res => {
-    let {code} = res.data;
+    //他存进里面的data里面
+    let {code} = res;
     console.log(res)
-    message.warn(code)
+    message.warn("这是成功resposne的发送信息")
     //用户没有登录
     //跳转登录界面
     if (code === 200) {

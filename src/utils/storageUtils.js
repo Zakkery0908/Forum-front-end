@@ -7,6 +7,7 @@ import store from 'store'
 const USER_KEY = 'user_key'
 const USER_NAME = 'user_name'
 const TOKEN = 'token'
+const USER_ID ='user_id'
 
 // user里面存储的是login接口返回的data
 const user = {
@@ -33,7 +34,12 @@ const user = {
         // localStorage.removeItem(USER_KEY)
         store.remove(USER_KEY)
     },
-
+    saveUserId(userId){
+        store.set(USER_ID,userId)
+    },
+    getUserId(){
+        return store.get(USER_ID) 
+    },
     /*
     保存用户名
      */

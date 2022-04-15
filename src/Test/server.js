@@ -1,8 +1,8 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser')
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: true }))
+
+app.use(bodyParser.urlencoded({ extended: false }))
 
 app.post('/login',(request,response)=>{
 response.setHeader('Access-Control-Allow-Origin','*');
@@ -12,16 +12,17 @@ response.setHeader('Access-Control-Allow-Origin','*');
 const username = request.body.username;
 const password = request.body.password;
 response.send({
- 
      data:{id:1,username:"zeqiang"},
      msg:"sadsd",
+     username:username,
      code:200
-
-
 })
 
 
 })
+
+
+
 
 app.post('/addUser',(request,response)=>{
 response.setHeader('Access-Control-Allow-Origin','*');
@@ -31,6 +32,23 @@ response.send({
     username: username,
     msg:"下面将添加用户"
 })});
+
+
+
+
+
+app.post('/sendComment',(request,response)=>{
+    response.setHeader('Access-Control-Allow-Origin','*');
+    const postId = request.body.postId;
+    const comment = request.body.comment;
+    console.log(request.body)
+    response.send({
+        postId: postId,
+        comment: comment,
+        others:"sadsad"
+    })});
+
+
 
 app.get('/getArticle',(request,response)=>{
     response.setHeader('Access-Control-Allow-Origin','*');
@@ -57,9 +75,27 @@ app.post('/create',(request,response)=>{
         description:description,
         title: title
     })});
+    app.post('/thumbArticleOne',(request,response)=>{
+        response.setHeader('Access-Control-Allow-Origin','*');
+        const postId = request.body.postId;
+        const userId = request.body.userId;
+        console.log(request.body)
+        response.send({
+            msg:"我已经收到你的点赞",
+            userId:userId,
+            postId: postId
+        })});
 
-
-
+        app.post('/thumbArticleTwo',(request,response)=>{
+            response.setHeader('Access-Control-Allow-Origin','*');
+            const postId = request.body.postId;
+          
+            console.log(request.body)
+            response.send({
+                msg:"成功更新点赞量",
+                postId: postId,
+                like:100
+            })});
 app.get('/getContent',(request,response)=>{
     response.setHeader('Access-Control-Allow-Origin','*');
     console.log(request.body)

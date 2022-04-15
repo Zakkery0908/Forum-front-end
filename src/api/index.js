@@ -13,8 +13,8 @@ export const reqRegisterVerifyCode = (email) => ajax(BASE + '/sendVerifyCode', {
     email
 }, 'POST')
 
-export const reqAddUser = (username, password, email,major) => ajax(BASE + '/addUser', {
-    username, password, email,major
+export const reqAddUser = (username, password, email,major,gender,grade) => ajax(BASE + '/addUser', {
+    username, password, email,major,gender,grade
 }, 'POST')
 
 export const getContent = (amount) => ajax(BASE + '/getContent', {
@@ -24,3 +24,8 @@ export const ReqCreate = (title,description,major,content) => ajax(BASE + '/crea
     title,description,major,content
 }, 'POST')
 export const ReqPost = (postId) => ajax(BASE+'/getArticle',{postId})
+export const sendComment=(comment,postId)=>ajax(BASE + '/sendComment', {
+    comment,postId
+}, 'POST')
+export const thumbArticleOne=(postId,userId)=>ajax(BASE+'/thumbArticleOne',{postId,userId},'POST')
+export const thumbArticleTwo=(postId)=>ajax(BASE+'/thumbArticleTwo',{postId},'POST')

@@ -41,17 +41,23 @@ export const login = (username, password) => {
         //获得login之后就开始就发送给后台
         //如果发送成功，对面就会返回一个token和一个用户信息，然后存储用户信息和token，然后
         //返回的部分 有code 有user数据 有token
-        axios.post('/login', {username, password}).then((res) => {
+        axios.post('/user/login', {username, password}).then((res) => {
             if (res.data.code === 200) {
                 console.log(res)
-                const user = res.data.data
+                const userId = res.code
+                console.log("验证login中的id的resposne")
+                //console.log(userId)
+                const user = res
                 const token = res.headers.authorization
+                storageUtils.saveUserId(userId)
+                
                 storageUtils.saveUser(user)
+               // console.log(user.id)
                 storageUtils.saveToken(token)
                 //目前store里面的状态就是登陆的user
                 dispatch(receiveUser(user))
             } else {
-                const msg = res.data.msg
+                const msg = res.msg
                 dispatch(showErrorMsg(msg))
             }
         })
