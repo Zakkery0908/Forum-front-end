@@ -52,7 +52,7 @@ export default class personCollect extends Component {
 
     const postList = this.state.postList
     console.log("测试postList")
-    console.log(postList[0].title)
+    
     console.log("!!!!!!!!!!我的状态：：：：")
     console.log(this.state)
     
