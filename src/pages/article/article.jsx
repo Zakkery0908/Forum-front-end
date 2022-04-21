@@ -155,7 +155,9 @@ export default class article extends Component {
       console.log("下面是返回的数据");
       console.log(result);
       if (result.code === 200) {
-        message.success('点赞成功')
+        if(this.state.isLiked==='like'){
+        message.success('取消点赞')
+      }else{message.success('点赞成功')}
       } else {
         message.error('点赞失败')
       }
@@ -184,7 +186,9 @@ export default class article extends Component {
       //result只包含msg(即json数据)
       console.log(result);
       if (result.code === 200) {
-        message.success('收藏成功')
+        if(this.state.iscollect==='collect'){
+          message.success('取消收藏')
+        }else{message.success('收藏成功')}
       } else {
         message.error('收藏失败')
       }
