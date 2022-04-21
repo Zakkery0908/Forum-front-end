@@ -232,8 +232,8 @@ class Login extends React.Component {
                     className="login-form"
                     initialValues={{
                         remember: true,
-                        username: 'admin',
-                        password: 'admin'
+                        username: 'root',
+                        password: '123456'
                     }}
                     onFinish={onFinish}
                 >
@@ -314,7 +314,7 @@ class Login extends React.Component {
                     visible={this.state.show === 1}
                     onOk={this.sendOrder}
                     onCancel={this.hideRegisterForm}
-                    okText='submit'
+                    okText='😊'
                     cancelText='back'
                 >
                     <div style={{display: 'flex'}}>
@@ -329,8 +329,8 @@ class Login extends React.Component {
 
 
 
-//zeqiang
-//生成一个container组件 Login是UI组件 state
+
+
 export default connect(
     //容器组件传递给UI组件的redux中处理的状态
     state => ({user: state.user}),

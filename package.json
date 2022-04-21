@@ -6,6 +6,7 @@
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.5",
     "@testing-library/user-event": "^12.8.3",
+    "@wangeditor/editor-for-react": "^1.0.1",
     "ant-design": "^1.0.0",
     "antd": "^4.14.0",
     "axios": "^0.21.1",
@@ -13,8 +14,11 @@
     "body-parser": "^1.19.2",
     "customize-cra": "^1.0.0",
     "express": "^4.17.3",
+    "highlight.js": "^11.5.1",
     "less": "^4.1.1",
     "less-loader": "^5.0.0",
+    "marked": "^4.0.14",
+    "pubsub-js": "^1.9.4",
     "react": "^17.0.1",
     "react-app-rewired": "^2.2.1",
     "react-dom": "^17.0.1",
@@ -50,8 +54,7 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }, 
-  
-  "proxy": "http://192.168.3.11:8082",
+  },
+  "proxy": "http://124.221.214.9:8081",
   "homepage": "."
 }

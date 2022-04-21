@@ -7,6 +7,7 @@ axios.defaults.withCredentials = true
 //拦截处理器 axios在发送之前 从本地存储中获取token，如果有的话，就放到请求头 如果没有就算了
 axios.interceptors.request.use(config => {
     let uToken = storageUtils.getToken();
+    console.log("这里是token------------------")
     console.log(uToken)
     if (uToken) {
         //我就在请求头里面添加一个头信息叫做U-TOKEN ==》jsessionid(token) 后台通过token作为key值可以在redis中获得loginUser的信息
@@ -47,15 +48,17 @@ export default function ajax(url, data = {}, type = 'GET') {
 
 //Promise 里面是另一个新的promise   promise里面有resolve和reject,通过promise.then来调用这两个函数  
     return new Promise((resolve, reject) => {
+        let uToken = storageUtils.getToken();
         let promise
         if (type === 'GET') { // 发GET请求
             promise = axios.get(url, { // 配置对象
                 params: data // 指定请求参数
-            })
+            },
+            {headers: {'Authorization': uToken}} )
    
            
         } else { // 发POST请求
-            promise = axios.post(url, data)
+            promise = axios.post(url, data,{headers: {'Content-Type': 'application/json; charset=utf-8'}})
         }
         // 2. 如果成功了, 调用resolve(value)
         promise.then(response => {

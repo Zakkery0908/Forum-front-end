@@ -1,7 +1,7 @@
 .pag_foot{
     background-color:#070707;
-    position: static;
-    bottom: 0;
+    position: relative;
+    bottom: 0px;
     width: 100%;
     height: 150px;
     margin:auto;

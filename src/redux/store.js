@@ -7,6 +7,5 @@ import {composeWithDevTools} from 'redux-devtools-extension'
 
 import reducer from './reducer'
 
-// 向外默认暴露store
-//zeqiang：
+
 export default createStore(reducer, composeWithDevTools(applyMiddleware(thunk)))

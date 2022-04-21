@@ -1,10 +1,22 @@
 //用来写的是个人页面组件
-import { Card, Avatar, Descriptions,Col,Statistic,Row} from 'antd';
-import { LikeOutlined,EditOutlined, EllipsisOutlined, SettingOutlined } from '@ant-design/icons';
+import { Card, Avatar, Descriptions,Col,Statistic,Row,Tag} from 'antd';
+import { Layout, Button, message } from 'antd';
+import { MessageOutlined, LikeOutlined,EditOutlined, EllipsisOutlined, SettingOutlined,TwitterOutlined,
+  YoutubeOutlined,
+  FacebookOutlined,
+  LinkedinOutlined,} from '@ant-design/icons';
 import React, { Component } from 'react'
+import {getPerson} from '../../api/index'
 import './person.css'
-import { Layout } from 'antd';
 import Nav from '../../components/Nav/Nav'
+import storageUtils from "../../utils/storageUtils"
+import {Route,Switch,Redirect} from 'react-router-dom'
+import PersonData from "./personData"
+import PersonLike from "./personLike"
+import PersonCollect from "./personCollect"
+import PersonCreate from "./personCreate"
+
+
 const { Header, Footer, Sider, Content } = Layout;
 const {Meta} = Card
 const gridStyle = {
@@ -12,6 +24,9 @@ const gridStyle = {
     textAlign: 'center',
     height:'40vh'
   };
+
+
+
 export default class person extends Component {
 
  //点击个人页面时发送请求  or  将个人信息存储在本地   
@@ -24,6 +39,47 @@ export default class person extends Component {
  //点赞机制：
  //redux主要是负责状态变换  点赞机制：redux
 
+  state = {
+    username:"",
+    grade:"",
+    gender:"",
+    major:"",
+    email:"",
+    postList:[]
+  }
+ 
+
+
+  getPerson1 = async ()=>{
+    const user = storageUtils.getUser();
+    const author_id = user.id;
+    let result = await getPerson(author_id)
+    console.log("这里是测试result person的地方")
+    console.log(result.data)
+    this.setState({ username:result.data[0].username,
+      grade:result.data[0].grade,
+      gender:result.data[0].gender,
+      major:result.data[0].major,
+      email:result.data[0].email,
+      postList:result.data[1]
+                  })
+    console.log(this.state)
+    
+    if (result.code === 200) {
+      message.success('refresh successfully')
+  } else {
+      message.error('sorry,there\'s something wrong')
+  }
+}
+
+
+
+
+
+
+componentDidMount(){
+  this.getPerson1()
+}
  
 
   render() {
@@ -36,51 +92,58 @@ export default class person extends Component {
             avatar={<Avatar src="https://joeschmoe.io/api/v1/random" />} 
             />
             <br/>
-            <p>name: </p>
-            <p>gender: male</p>
-            <p>email: zeqiang.ning19@student</p>
-            <p>major: ICS</p>
+            <p>name: {this.state.username}</p>
+            <p>gender: {this.state.gender}</p>
+            <p>email: {this.state.email}</p>
+            <p>major: {this.state.major}</p>
+            <Tag icon={<TwitterOutlined />} color="#55acee">
+      Twitter
+    </Tag>
+    <Tag icon={<YoutubeOutlined />} color="#cd201f">
+      Youtube
+    </Tag>
+    <Tag icon={<FacebookOutlined />} color="#3b5999">
+      Facebook
+    </Tag>
+    <Tag icon={<LinkedinOutlined />} color="#55acee">
+      LinkedIn
+    </Tag>
             </Card>
         </div>
     
 
 
 
-        <Layout>
+
+
+        <Layout style={{height:'1000px'}}>
         {/* 这里放一个导航信息 */}
         <Sider width='256px'
-                       style={{
-                           overflow: 'auto',
-                           height: '100vh',
-                           left: 0,
-                       }}><Nav/></Sider>
+               style={{
+                      overflow: 'auto',
+                      left: 0,
+                       }}>
+              <Nav/>
+        </Sider>
+
         {/* 匹配路由的部分 */}
-          <Content>
-          <Card title="数据展示">
-    <Card.Grid style={gridStyle}>
-    
-    <Col span={25}>
-      <Statistic title="获赞量" value={1128} 
-       prefix={<LikeOutlined />} />
-    </Col>
+         <Content>
 
+             
 
-    </Card.Grid>
-    <Card.Grid style={gridStyle}>Content</Card.Grid>
-    <Card.Grid style={gridStyle}>Content</Card.Grid>
-    <Card.Grid style={gridStyle}>Content</Card.Grid>
-  </Card>
+             <Switch>
+									<Route path="/person/personData" component={PersonData}/>
+                  <Route path="/person/personLike" component={PersonLike}/>
+                  <Route path="/person/personCollect" component={PersonCollect}/>
+                  <Route path="/person/personCreate" component={PersonCreate}/>
+                  <Redirect to="/person/personData"></Redirect>
+									
+						 </Switch>
 
-
-          {/* 
-          <Switch>
-                            <Redirect from='/' exact to='/home'/>
-                            <Route path='/home' component={Home}/>
-                        </Switch>
-          */}
-          </Content>
+         </Content>
           
         </Layout>
+
       </Layout>
       
        

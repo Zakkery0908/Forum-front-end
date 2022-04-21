@@ -1,5 +1,5 @@
 //列表组件
-import { List, Avatar, Space,Layout,Button,message,Divider} from 'antd';
+import { List, Avatar, Space,Layout,Button,message} from 'antd';
 import { MessageOutlined, LikeOutlined, StarOutlined } from '@ant-design/icons';
 import React, { Component } from 'react'
 import PubSub from 'pubsub-js';
@@ -10,6 +10,20 @@ import { Link } from 'react-router-dom';
 
 
 
+//获取了23个信息
+const listData = [];
+for (let i = 0; i < 23; i++) {
+    //这里的信息应该从后台获取
+    listData.push({
+    href: 'https://ant.design',
+    title: `分享贴子 ${i}`,
+    avatar: 'https://joeschmoe.io/api/v1/random',
+    description:
+      '雅思8.0成功到手！学习经验+资源分享贴',
+    content:
+     '帖子内容',
+  });
+};
 
 
 
@@ -23,7 +37,7 @@ const IconText = ({ icon, text }) => (
 );
  
 
-export default class List1 extends Component {
+export default class searchList extends Component {
   //存储的是所有内容
   handleClick = (value, key) => {
     this.props.history.push(key)
@@ -35,39 +49,29 @@ state = {
   keyWord:'',
 }
 
-
-  getContent = async ()=>{
-      const amount =100;
-      let result = await getContent(amount)
-      this.setState({pages:result.data,isSearch:false,keyWord:""})
+componentDidMount(){
+  this.token = PubSub.subscribe('KeyWords',(_,stateObj)=>{
+      this.setState(stateObj)
       console.log(this.state)
       
-      if (result.code === 200) {
-        message.success('refresh successfully')
-    } else {
-        message.error('sorry,there\'s something wrong')
-    }
-    //数据应该是 result.allContent  他其实是一个list
-   
-  }
+  })
+}
 
-  componentDidMount(){
-    this.getContent()
-  }
+componentWillUnmount(){
+  PubSub.unsubscribe(this.token)
+}
+
+  
 
   render() {
     
     return (
       
    <Layout className='AllList'>
-      {/* 点击refresh就应该向后台请求数据  用户输入应该是 number */}
-       <Button type="primary" onClick={this.getContent}>
-      Refresh
-    </Button>
 
       <div>
       <h1>
-        { "展示列表"}
+        { "查询结果(关键词 " + this.state.keyWord+")"}
       </h1>
 
     <List 
@@ -78,18 +82,22 @@ state = {
       onChange: page => {
         console.log(page);
       },
-      pageSize: 5,
+      pageSize: 3,
     }}
 
     dataSource = {this.state.pages}
     
-    
+    footer={
+      <div>
+        <b>ant design</b> footer part
+      </div>
+    }
 
     renderItem={item => (
-     <Layout>
+
       <List.Item
         key={item.title}
-        className='titlefont'
+       
         actions={[
           <IconText icon={StarOutlined} text="156" key="list-vertical-star-o" />,
           <IconText icon={LikeOutlined} text="156" key="list-vertical-like-o" />,
@@ -111,14 +119,9 @@ state = {
         />
 
 
-    
-        
       </List.Item>
-     <Divider  />
-     </Layout>
     )}/>
-   
-     </div> 
+      </div>
       
     
   </Layout>

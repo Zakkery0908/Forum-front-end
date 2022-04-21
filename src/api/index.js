@@ -3,29 +3,27 @@
 import ajax from './ajax'
 
 const BASE = ''
-
-export const reqVerify = ({verifyCode, applicationId}) => ajax(BASE + '/verifyApplication', {
-    verifyCode,
-    applicationId
-}, 'POST')
-
-export const reqRegisterVerifyCode = (email) => ajax(BASE + '/sendVerifyCode', {
-    email
-}, 'POST')
-
-export const reqAddUser = (username, password, email,major,gender,grade) => ajax(BASE + '/addUser', {
+export const reqAddUser = (username, password, email,major,gender,grade) => ajax(BASE + '/user/addUser', {
     username, password, email,major,gender,grade
 }, 'POST')
 
 export const getContent = (amount) => ajax(BASE + '/getContent', {
     amount
 })
-export const ReqCreate = (title,description,major,content) => ajax(BASE + '/create', {
-    title,description,major,content
+export const ReqCreate = (title,description,content,author_id) => ajax(BASE + '/create', {
+    title,description,content,author_id
 }, 'POST')
 export const ReqPost = (postId) => ajax(BASE+'/getArticle',{postId})
-export const sendComment=(comment,postId)=>ajax(BASE + '/sendComment', {
-    comment,postId
+
+export const sendComment=(comment,blogId,authorId)=>ajax(BASE + '/sendComment', {
+    comment,blogId,authorId
 }, 'POST')
-export const thumbArticleOne=(postId,userId)=>ajax(BASE+'/thumbArticleOne',{postId,userId},'POST')
-export const thumbArticleTwo=(postId)=>ajax(BASE+'/thumbArticleTwo',{postId},'POST')
+export const thumbArticleOne=(blog_id,user_id)=>ajax(BASE+'/thumbArticleOne',{blog_id,user_id},'POST')
+export const thumbArticleTwo=(blog_id)=>ajax(BASE+'/thumbArticleTwo',{blog_id},'POST')
+export const getComment=(blogId)=>ajax(BASE+'/getComment',{blogId})
+export const reqSearchItems = (keyword) => ajax(BASE + '/keyWords', {
+     keyword
+}, 'POST')
+export const collectOne=(blog_id,user_id)=>ajax(BASE+'/collectOne',{blog_id,user_id},'POST')
+export const collectTwo=(blog_id)=>ajax(BASE+'/collectTwo',{blog_id},'POST')
+export const getPerson = (author_id) => ajax(BASE + '/user/getPerson', {author_id})
