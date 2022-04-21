@@ -14,7 +14,7 @@ import { Link } from 'react-router-dom';
 
 
 
-//用来封装图标样式的  text也是我们要从后台获取的值
+//封装图标样式
 const IconText = ({ icon, text }) => (
   <Space>
     {React.createElement(icon)}
@@ -24,7 +24,6 @@ const IconText = ({ icon, text }) => (
  
 
 export default class List1 extends Component {
-  //存储的是所有内容
   handleClick = (value, key) => {
     this.props.history.push(key)
 }
@@ -35,7 +34,7 @@ state = {
   keyWord:'',
 }
 
-
+//获取List
   getContent = async ()=>{
       const amount =100;
       let result = await getContent(amount)
@@ -47,7 +46,7 @@ state = {
     } else {
         message.error('sorry,there\'s something wrong')
     }
-    //数据应该是 result.allContent  他其实是一个list
+
    
   }
 

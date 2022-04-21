@@ -1,8 +1,5 @@
 //路由页面
-
 import { Layout } from 'antd';
-
-
 import Header1 from "../../components/header";
 import { Redirect } from "react-router-dom";
 import './footer.css'

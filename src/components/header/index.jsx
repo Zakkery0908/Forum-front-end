@@ -1,8 +1,8 @@
 import React, {Component} from 'react'
 import PubSub from 'pubsub-js'
-import { Layout, Menu, Breadcrumb } from 'antd';
-import {Redirect, withRouter} from 'react-router-dom'
-import {Input, Space, Modal, Tooltip, Dropdown, Button, message, Divider} from 'antd';
+import { Menu } from 'antd';
+import { withRouter} from 'react-router-dom'
+import {Input, Modal, message} from 'antd';
 import './index.css'
 import {connect} from "react-redux";
 import {logout} from "../../redux/actions";
@@ -21,11 +21,8 @@ class Header extends Component {
 
     logout = () => {
         Modal.confirm({
-            content: ' 你确定要退出登录吗?',
+            content: ' 要退出登录吗?',
             onOk: () => {
-                console.log('OK', this)
-                // 跳转到login
-                // this.props.history.replace('/login')
                 this.props.logout()
             },
             onCancel() {

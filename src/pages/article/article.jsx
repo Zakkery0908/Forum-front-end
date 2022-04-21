@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { getComment, ReqPost, thumbArticleOne, thumbArticleTwo, collectOne, collectTwo, sendComment } from '../../api/index';
 import './article.less';
 import './show.css';
-import { Comment, Avatar, Form, Button, List, Input, Tooltip, message, Icon } from 'antd';
+import { Comment, Avatar, Form, Button, List, Input, message } from 'antd';
 import { HeartFilled, HeartOutlined, StarFilled, StarOutlined } from '@ant-design/icons';
 import storageUtils from "../../utils/storageUtils";
 
@@ -57,9 +57,9 @@ export default class article extends Component {
     //返回过来
     //content这里可能要用redux
     if (result.code === 200) {
-      message.success('comment successfully')
+      message.success('评论发送成功')
     } else {
-      message.error('评论发送失败了')
+      message.error('评论发送失败')
     }
     this.setState({
       submitting: true,

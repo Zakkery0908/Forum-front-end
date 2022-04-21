@@ -9,9 +9,9 @@ import {
   BulbOutlined,
 } from '@ant-design/icons';
 import { message } from 'antd';
-import {Link, Redirect, withRouter} from 'react-router-dom'
+import {Link, withRouter} from 'react-router-dom'
 import storageUtils from "../../utils/storageUtils"
-import {getPerson, ReqPost} from '../../api/index'
+import {getPerson} from '../../api/index'
 
 class Nav extends Component { 
     state = {

@@ -4,31 +4,9 @@ import { MessageOutlined, LikeOutlined, StarOutlined } from '@ant-design/icons';
 import React, { Component } from 'react'
 import PubSub from 'pubsub-js';
 import './index.css'
-import {getContent, reqSearchItems} from '../../api/index'
-import testdata from '../../Test/testdata.json'
 import { Link } from 'react-router-dom';
 
-
-
-//获取了23个信息
-const listData = [];
-for (let i = 0; i < 23; i++) {
-    //这里的信息应该从后台获取
-    listData.push({
-    href: 'https://ant.design',
-    title: `分享贴子 ${i}`,
-    avatar: 'https://joeschmoe.io/api/v1/random',
-    description:
-      '雅思8.0成功到手！学习经验+资源分享贴',
-    content:
-     '帖子内容',
-  });
-};
-
-
-
-
-//用来封装图标样式的  text也是我们要从后台获取的值
+//用来封装图标样式的 
 const IconText = ({ icon, text }) => (
   <Space>
     {React.createElement(icon)}
@@ -38,7 +16,7 @@ const IconText = ({ icon, text }) => (
  
 
 export default class searchList extends Component {
-  //存储的是所有内容
+  
   handleClick = (value, key) => {
     this.props.history.push(key)
 }
@@ -49,6 +27,7 @@ state = {
   keyWord:'',
 }
 
+//父子组件之间传递数据
 componentDidMount(){
   this.token = PubSub.subscribe('KeyWords',(_,stateObj)=>{
       this.setState(stateObj)
