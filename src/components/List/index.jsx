@@ -1,5 +1,5 @@
 //列表组件
-import { List, Avatar, Space,Layout,Button,message,Divider,Card} from 'antd';
+import { List, Avatar, Space,Layout,Button,message,Divider,Card,Popover} from 'antd';
 import { MessageOutlined, LikeOutlined, StarOutlined } from '@ant-design/icons';
 import React, { Component } from 'react'
 import PubSub from 'pubsub-js';
@@ -25,7 +25,12 @@ const IconText = ({ icon, text }) => (
     {text}
   </Space>
 );
-
+const content =()=>{ (
+  <div>
+    <p>name</p>
+    <p>major</p>
+  </div>
+)};
 export default class List1 extends Component {
   handleClick = (value, key) => {
     this.props.history.push(key)
@@ -166,10 +171,11 @@ state = {
 
           <List.Item.Meta
             
-            avatar={<Avatar
+            avatar={ <Popover content={content()} title="Personal Information"><Avatar
                       style={{width:'50px',
                               height:'50px'}} 
-                      src= {this.state.avatars[index%5]}/>}
+                      src= {this.state.avatars[index%5]}/></Popover>}
+
             title={<Link 
                     style={{fontSize:'20px',
                             overflow: 'hidden',
