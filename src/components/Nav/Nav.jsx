@@ -70,19 +70,19 @@ class Nav extends Component {
 
           {/* 设置路由组件并向路由组件传递参数 */}
           <Menu.Item key="1" icon={<PieChartOutlined /> }>
-          <Link to='/person/personData'><span>数据展示页面</span></Link>          
+          <Link to='/person/personData'><span>Data display</span></Link>          
           </Menu.Item>
 
           <Menu.Item key="2" icon={<HeartOutlined />} onClick={value => this.getPerson(value)}>
-          <Link to={{pathname:'/person/personLike',state:{likeList:this.state.likeList}}}> <span>点赞过的文章</span></Link> 
+          <Link to={{pathname:'/person/personLike',state:{likeList:this.state.likeList}}}> <span>Liked articles</span></Link> 
           </Menu.Item>
 
           <Menu.Item key="3"icon={<BulbOutlined />} onClick={value => this.getPerson(value)}>
-          <Link to={{pathname:'/person/personCreate', state:{createList:this.state.createList}}}><span>创作过的文章</span></Link> 
+          <Link to={{pathname:'/person/personCreate', state:{createList:this.state.createList}}}><span>Created articles</span></Link> 
           </Menu.Item>
 
           <Menu.Item key="4"icon={<BulbOutlined />} onClick={value => this.getPerson(value)}>
-          <Link to={{pathname:'/person/personCollect', state:{collectList:this.state.collectList}}}><span>收藏过的文章</span></Link> 
+          <Link to={{pathname:'/person/personCollect', state:{collectList:this.state.collectList}}}><span>Collected articles</span></Link> 
           </Menu.Item>
         </Menu>
       </div>

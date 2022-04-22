@@ -1,5 +1,5 @@
 //路由页面
-import { Layout } from 'antd';
+import { Layout, BackTop } from 'antd';
 import Header1 from "../../components/header";
 import { Redirect } from "react-router-dom";
 import './footer.css'
@@ -11,7 +11,7 @@ import article from "../article/article";
 import React, { Component } from 'react'
 import search from "../search/search";
 import { connect } from "react-redux";
-
+import {ArrowUpOutlined} from "@ant-design/icons"
 const { Header, Content, Footer } = Layout;
 
 class Admin extends Component {
@@ -49,20 +49,21 @@ class Admin extends Component {
                 <Footer style={{ textAlign: 'center' }}>
                     <div class="pag_foot">
                         <div class="footTitle">
-                            <b>XJTLU Learning and Sharing Web</b>
+                            <b>XJTLU Online Learning Content Sharing Platform</b>
                         </div>
                         <div class="left">
                             <div class="aboutAs">
-                                <p>关于我们</p>
+                                <p>About As</p>
                             </div>
                             <div class="statement">
-                                <p>本平台是由CPT202小组成员自主开发的西浦校内在线学习交流平台</p>
+                                <p>This platform is an online learning exchange platform of XJT202 developed by CPT202 team members</p>
                             </div>
                         </div>
 
 
                         <div class="members">
-                            <p>开发成员</p>
+                            <p>Developers</p>
+                            <br/>
                         </div>
                         <div class="col1">
                             <ul>
@@ -87,7 +88,9 @@ class Admin extends Component {
                         </div>
                     </div>
 
-
+                    <BackTop>
+                        <div className='top'><ArrowUpOutlined /></div>
+                    </BackTop>
                 </Footer>
 
             </Layout>

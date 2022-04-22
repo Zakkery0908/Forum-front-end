@@ -9,6 +9,7 @@ import {logout} from "../../redux/actions";
 import {
 
     LogoutOutlined,
+    UserOutlined
    
 } from '@ant-design/icons';
 import { getContent, reqSearchItems } from '../../api';
@@ -69,18 +70,20 @@ class Header extends Component {
            
         <div className="header">
 
-        <div className="header-nav"> 
-        <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']}>
-        <Menu.Item key="1" onClick={value => this.handleClick(value, "/person")}>个人主页</Menu.Item>
-        <Menu.Item key="2" onClick={value => this.handleClick(value, "/home")}>首页</Menu.Item>
-        <Menu.Item key="3" onClick={value => this.handleClick(value, "/fenlei")}>分类 </Menu.Item>
-        <Menu.Item key="4" onClick={value => this.handleClick(value, "/create")}>开始创作</Menu.Item>
+        <div className="header-nav"
+            style={{marginLeft:'50px'}}> 
+        <Menu theme="dark" mode="horizontal" >
+        <Menu.Item key="2" onClick={value => this.handleClick(value, "/home")} style={{
+            color:'white'}}>Home</Menu.Item>
+        <Menu.Item key="3" onClick={value => this.handleClick(value, "/fenlei")} style={{
+            color:'white'}}>Classify </Menu.Item>
+        <Menu.Item key="4" onClick={value => this.handleClick(value, "/create")} style={{
+            color:'white'}}>Create</Menu.Item>
+        <Menu.Item key="1" onClick={value => this.handleClick(value, "/person")} style={{
+            color:'white'}} icon={<UserOutlined />}>Personal</Menu.Item>
         <Menu.Item key="5">
         <div className='search'>
     
-
- 
- 
         <Search placeholder="input search text" 
          allowClear onSearch={(value) => this.handleSearch(value)}
                             enterButton
@@ -90,18 +93,24 @@ class Header extends Component {
                     height: '40px',
                     width:'120px',
                     lineHeight: '250%',
-                    backgroundColor: '#0D8FBF',
+                    backgroundColor: '#302188',
                     margin: '10px 20px',
                     borderRadius: '10px',
                     float:'right',
                     color:'white',
                     textAlign:'center'
+
                 }} onClick={this.logout}>
-                    <LogoutOutlined/>
+                    <LogoutOutlined />
                     log out
                 </Menu.Item>
 
+                <span className='webName'>XJTLU Online Learning Content Sharing Platform</span>
       </Menu>
+
+      
+
+        
 
         </div>
 

@@ -6,7 +6,7 @@
 	float: left;
 	margin-bottom: 10px;
    margin-right: 20px;
-
+   line-height: 5px;
 }
 
 /* 右侧展示区 */
@@ -23,16 +23,67 @@
 	margin-top: 0px;
 	
 }
+
+
+
 .titlefont{
-	margin-top: 8px;
-	background-color:rgb(225, 231, 236);
 	font-size: large;
 	font-weight:bolder;
+	width: 95%;
+	
+	border-left: solid;
+	border-width: 7.5px;
+	
+	padding-right: -5px;
+	margin-bottom: 10px;
+	margin-top:10px;
+	height:120px;
+
 }
+
+
+.ListOut{
+	margin-bottom: 10px;
+	margin-top:10px;
+	height:150px;
+
+	border: solid;
+	border-width: 2px;
+	border-radius: 15px;
+	border-color: rgba(157, 185, 197, 0.473);
+}
+
+.ListOut:hover{
+	background-color: aliceblue;
+}
+
 .list_title_font{
 	font-size: 25px;
 	font-weight:bolder;
 }
+
+.site-calendar-demo-card{
+    width: 25%;
+    float: right;
+	margin-top: 20px;
+	border-radius: 25px;
+	
+}
+
+.link1.link2.link3:hover{
+	color: bisque;
+
+}
+
+.actions{
+	margin-left: 10px;
+	font-size: 15px;
+	border-radius: 5px;
+	width: 50px;
+	
+}
+
+
 
 
 

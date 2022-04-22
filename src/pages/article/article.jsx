@@ -225,19 +225,21 @@ export default class article extends Component {
                   <span>发布于:  {this.state.postInfo1.post_time}     </span><br />
                   <span>作者:   {this.state.postInfo2.username}</span>
                   {/* 点赞功能:这里是调用点赞功能的地方 */}
-                  <div className='likecollect'>
-                    <span onClick={thumbArticle} >
+                   <div className='likecollect'>
+                   <span onClick={thumbArticle} style={{fontSize:'20px'}}>
                       {
-                        this.state.isLiked === 'like' ? <HeartFilled style={{ fontSize: '25px', color: 'red' }} /> : <HeartOutlined style={{ fontSize: '25px', color: '#08c' }} />
+                       this.state.isLiked === 'like' ? '💖' :'🖤'
                       }{this.state.like}
                     </span>
-                    <span onClick={collectArticle} >
-                      {
-                        this.state.iscollect === 'collect' ? < StarFilled style={{ fontSize: '25px', color: 'red' }} /> : < StarOutlined style={{ fontSize: '25px', color: '#08c' }} />
-                      }{this.state.collect}
-                    </span>
-                  </div>
+
+                    <span onClick={collectArticle} style={{fontSize:'20px'}}>
+                       {
+                       this.state.iscollect === 'collect' ? '🎇':'★'
+                         }{this.state.collect}
+                         </span>
+                        </div>
                 </div>
+                <br/>
                 <div className="topic-description">
                   <span>{this.state.postInfo1.description}</span>
                 </div>

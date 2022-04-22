@@ -1,4 +1,16 @@
 .site-card-border-less-wrapper {
+  height:auto;
+  width:100%;
+
     padding: 30px;
-    background: url("../person/back.png");
+    background: url("../person/learning.png");
+  }
+
+  .card-title{
+    color: white;
+    font-size: 20px;
+    text-align: center;
+    background-color:#382173 ;
+    border-radius: 5px;
+    width: 200px;
   }

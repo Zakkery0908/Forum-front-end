@@ -30,7 +30,7 @@
 }
 
 .col1{
-    width: 1000px;
+    width: 100px;
 	height: 60px;
 	float:left;
 	margin-left: 800px;
@@ -39,7 +39,7 @@
 }
 
 .col2{
-    width: 1000px;
+    width: 100px;
 	height: 60px;
 	float:left;
 	margin-left: 950px;
@@ -48,7 +48,7 @@
 }
 
 .col3{
-    width: 1000px;
+    width: 100px;
 	height: 60px;
 	float:left;
 	margin-left: 1100px;
@@ -59,3 +59,13 @@
 .footTitle{
 	margin-top: 10px;
 }
+
+.top{
+    height: 40px;
+    width: 40px;
+    border-radius:20px;
+    background-color:rgb(226, 228, 230);
+    color:rgb(31, 31, 31);
+    text-align: center;
+    font-size: 30px;
+    }

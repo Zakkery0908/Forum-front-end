@@ -17,6 +17,7 @@
        height: 745px;
        background-color: #f0f0f0;
        overflow: auto;
+       width: 90%;
    }
    
    .show-html h1{
@@ -102,5 +103,11 @@
    }
    .show-html ol li{
 
-font-weight:bold;
-}
+        font-weight:bold;
+        }
+    
+    .formitem{
+        font-weight: bolder;
+        margin-left: 100px;
+    }
+    

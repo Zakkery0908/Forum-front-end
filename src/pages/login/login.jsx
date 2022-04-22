@@ -62,17 +62,17 @@ class Login extends React.Component {
 
 
 
-//Demo方法  向服务器发送数据+返回注册界面
+
 //await必须写在async函数当中，如果await右边的promise是失败的
-        const Demo = () => {
+        const Register = () => {
             const onFinish = async (values) => {
                 const {username, password, email, major,gender,grade} = values
                 let result = await reqAddUser(username, password, email, major,gender,grade)
                 console.log(result)
                 if (result.code === 200) {
-                    message.success('注册成功!!!!')
+                    message.success('注册成功')
                 } else {
-                    message.error('注册有点问题!!!!')
+                    message.error('注册失败')
                 }
                 this.setState({show: 0})
             };
@@ -100,8 +100,7 @@ class Login extends React.Component {
                         label="password"
                         rules={[
                             {required: true, message: 'password is required!'},
-                            // {pattern: /^[a-zA-Z0-9_]+$/, message: '密码必须是英文、数字或下划线组成'}
-                            {pattern: /^[a-zA-Z0-9_]+$/, message: 'the passcode must be English words, integer or "_"'}
+                            {pattern: /^[a-zA-Z0-9_]+$/, message: 'the passcode must be alphabet, number or "_"'}
                         ]}
                     >
                      <Input/>
@@ -186,7 +185,7 @@ class Login extends React.Component {
                     </Form.Item>
                     
                     <Form.Item wrapperCol={{...layout.wrapperCol, offset: 8}}>
-                        <Button type="primary" htmlType="submit">
+                        <Button type="ghost" htmlType="submit">
                             submit
                         </Button>
                     </Form.Item>
@@ -211,7 +210,7 @@ class Login extends React.Component {
 
 
 // 返回登录界面
-        const NormalLoginForm = () => {
+        const LoginForm = () => {
             const onFinish = async (values) => {
                 console.log('Received values of form: ', values)
                 //调用login，把值传递给login
@@ -267,8 +266,9 @@ class Login extends React.Component {
 
 
                     <Form.Item>
-                        <Button type="primary" htmlType="submit" ghost="true" className="login-form-button">
-                            login
+                        <Button type="primary" htmlType="submit" ghost="true" className="login-form-button"
+                                >
+                            Login
                         </Button>
                     </Form.Item>
                     <Form.Item>
@@ -276,14 +276,8 @@ class Login extends React.Component {
                                 onClick={() => this.setState({show: 1})}>
                             Register
                         </Button>
-                    </Form.Item>
-                    <Form.Item className='login-form-remember'>
-                        <Form.Item name="remember" valuePropName="unchecked" className='login-form-remember-switch'>
-                            {/*<Switch/>*/}
-                            {/*<span style={{fontSize: '.75rem', fontWeight: '400'}}>&nbsp;&nbsp;&nbsp;记住用户名</span>*/}
-                            <Checkbox className="rem">remember username</Checkbox>
-                            {/*<Switch checkedChildren="记住密码" unCheckedChildren="" defaultChecked />*/}
-                        </Form.Item>
+                    
+
                     </Form.Item>
                 </Form>
             );
@@ -298,12 +292,12 @@ class Login extends React.Component {
             <div className='login'>
                 <header className='login-header'>
                     
-                    <h1>XJTLU Online Learning Content Sharing Website </h1>
+                    <h1>XJTLU Online Learning Content Sharing Platform </h1>
                 </header>
         
                 <section className='login-content'>
                     <h2><UserOutlined />XJTLU </h2>
-                    {NormalLoginForm()}
+                    {LoginForm()}
                     
                 </section>
                 <footer>
@@ -316,9 +310,10 @@ class Login extends React.Component {
                     onCancel={this.hideRegisterForm}
                     okText='😊'
                     cancelText='back'
-                >
+                    okButtonProps={{ disabled: true }}
+                >R
                     <div style={{display: 'flex'}}>
-                        {Demo()}
+                        {Register()}
                     </div>
                 </Modal>
 

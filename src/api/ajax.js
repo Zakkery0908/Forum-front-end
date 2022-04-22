@@ -7,7 +7,6 @@ axios.defaults.withCredentials = true
 //拦截处理器 axios在发送之前 从本地存储中获取token
 axios.interceptors.request.use(config => {
     let uToken = storageUtils.getToken();
-    console.log("这里是token------------------")
     console.log(uToken)
     if (uToken) {
         config.headers['Authorization'] = uToken;
@@ -22,10 +21,6 @@ axios.interceptors.request.use(config => {
 
 //拦截处理器 axios截取response并对数据作出统一处理
 axios.interceptors.response.use(res => {
-    //他存进里面的data里面
-    let { code } = res;
-    console.log(res)
-    //message.warn("这是成功resposne的发送信息")
     return res;
 
 }, error => {

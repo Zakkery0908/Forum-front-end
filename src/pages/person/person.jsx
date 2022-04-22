@@ -2,7 +2,7 @@
 import { Card, Avatar, Descriptions,Col,Statistic,Row,Tag} from 'antd';
 import { Layout, Button, message } from 'antd';
 import { MessageOutlined, LikeOutlined,EditOutlined, EllipsisOutlined, SettingOutlined,TwitterOutlined,
-  YoutubeOutlined,
+  YoutubeOutlined,UserOutlined,SkinOutlined,MailOutlined,CrownOutlined,
   FacebookOutlined,
   LinkedinOutlined,} from '@ant-design/icons';
 import React, { Component } from 'react'
@@ -26,7 +26,6 @@ const gridStyle = {
   };
 
 
-
 export default class person extends Component {
 
  //点击个人页面时发送请求  or  将个人信息存储在本地   
@@ -47,7 +46,7 @@ export default class person extends Component {
     email:"",
     postList:[]
   }
- 
+
 
 
   getPerson1 = async ()=>{
@@ -80,6 +79,7 @@ export default class person extends Component {
 componentDidMount(){
   this.getPerson1()
 }
+
  
 
   render() {
@@ -87,25 +87,26 @@ componentDidMount(){
         <Layout>
        
         <div className="site-card-border-less-wrapper">
-        <Card title="Personal information" bordered={false} theme="dark" style={{ width: 300 }}>
+        <Card  title={ <div className='card-title'>Personal information</div>} 
+                bordered={false} theme="dark" style={{ width: 300, background:'#FFFFFFC7'}}>
             <Meta
-            avatar={<Avatar src="https://joeschmoe.io/api/v1/random" />} 
+            avatar={<Avatar style={{width:'50px',height:'50px'}} src="https://joeschmoe.io/api/v1/random" />} 
             />
             <br/>
-            <p>name: {this.state.username}</p>
-            <p>gender: {this.state.gender}</p>
-            <p>email: {this.state.email}</p>
-            <p>major: {this.state.major}</p>
-            <Tag icon={<TwitterOutlined />} color="#55acee">
+            <p style={{fontSize:'17px'}}><span style={{fontWeight:'bolder'}}><UserOutlined />{" "}Name: </span>{this.state.username}</p>
+            <p style={{fontSize:'17px'}}><span style={{fontWeight:'bolder'}}><SkinOutlined />{" "}Gender: </span> {this.state.gender}</p>
+            <p style={{fontSize:'17px'}}><span style={{fontWeight:'bolder'}}><MailOutlined />{" "}E-mail: </span> {this.state.email}</p>
+            <p style={{fontSize:'17px'}}><span style={{fontWeight:'bolder'}}><CrownOutlined />{" "}Major: </span> {this.state.major}</p>
+    <Tag icon={<TwitterOutlined />} color="#55acee" style={{width:'80px'}}>
       Twitter
     </Tag>
-    <Tag icon={<YoutubeOutlined />} color="#cd201f">
+    <Tag icon={<YoutubeOutlined />} color="#cd201f" style={{width:'80px'}}>
       Youtube
     </Tag>
-    <Tag icon={<FacebookOutlined />} color="#3b5999">
+    <Tag icon={<FacebookOutlined />} color="#3b5999" style={{width:'80px'}}>
       Facebook
     </Tag>
-    <Tag icon={<LinkedinOutlined />} color="#55acee">
+    <Tag icon={<LinkedinOutlined />} color="#55acee" style={{width:'80px'}}>
       LinkedIn
     </Tag>
             </Card>

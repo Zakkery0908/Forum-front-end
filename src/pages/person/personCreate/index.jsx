@@ -1,8 +1,17 @@
 import React, { Component } from 'react'
-import { List, Avatar, Space,Layout,Button,message} from 'antd';
+import { List, Avatar, Space,Layout,Button,message,Divider} from 'antd';
 import { MessageOutlined, LikeOutlined, StarOutlined } from '@ant-design/icons';
 import {ReqPost} from '../../../api/index'
 import { Link } from 'react-router-dom';
+import img1 from '../../../img/img4.png'
+import img2 from '../../../img/img2.png'
+import img3 from '../../../img/img3.png'
+import img4 from '../../../img/img1.png'
+import ava1 from '../../../img/avatar1.svg'
+import ava2 from '../../../img/avatar2.svg'
+import ava3 from '../../../img/avatar3.svg'
+import ava4 from '../../../img/avatar4.svg'
+import ava5 from '../../../img/avatar5.svg'
 
 
 const IconText = ({ icon, text }) => (
@@ -16,6 +25,19 @@ export default class personCreate extends Component {
   
   state = {
      postList:[],
+     images:[
+      img1,
+      img2,
+      img3,
+      img4,
+    ],
+    avatars:[
+      ava1,
+      ava2,
+      ava3,
+      ava4,
+      ava5
+    ]
 
   }
 
@@ -30,18 +52,17 @@ export default class personCreate extends Component {
         //遍历点赞列表，通过id获取文章内容，并更新state
         createList.map( async (postId) => {
          
-              let result = await ReqPost(postId)
-              const postInfo1 = result.data[0];
+          ReqPost(postId).then(response => {
+           
+            const postInfo1 = response.data[0];
+            this.setState({
+              postList: [...this.state.postList, postInfo1]
+          })
+          }).catch(error => {
+            console.log("出错了")
+          })
               
-              this.setState({
-                  postList: [...this.state.postList, postInfo1]
-              })
-              console.log(this.state)
-              // if (result.code === 200) {
-              //   message.success('refresh successfully')
-              // } else {
-              //   message.error('sorry,there\'s something wrong')
-              // }
+              
         })
         
   }
@@ -62,9 +83,12 @@ export default class personCreate extends Component {
           <div>
           <h1 style={{marginLeft:'35px', 
                       size: '30px',
+                      marginTop:'15px',
+                      fontSize:'15px'
                     }}>
-            { "我的创作"}
+            { "My Creations"}
           </h1>
+          <br/>
 
          <List 
             className="oneList"
@@ -74,14 +98,14 @@ export default class personCreate extends Component {
               onChange: page => {
                 console.log(page);
               },
-              pageSize: 4,
+              pageSize: 6,
             }}
 
             style={{marginLeft:'20px',width:'825px',
                     }}
 
             dataSource = {postList}
-            renderItem={item => (
+            renderItem={(item,index) => (
 
               <List.Item
                 key={item.title}
@@ -91,36 +115,44 @@ export default class personCreate extends Component {
                   <IconText icon={LikeOutlined} text="156" key="list-vertical-like-o" />,
                   <IconText icon={MessageOutlined} text="2" key="list-vertical-message" />,
                 ]}
+                
                 extra={
                   <img
-                    width={272}
-                    style={{marginRight:'10px'}}
+                    width={200}
+                    style={{marginRight:'10px',
+                            height:'100px',
+                            marginBottom:'10px',
+                            marginTop:'10px'
+                            
+                    }}
                     alt="logo"
-                    src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png"
-                  />
+                    src={this.state.images[index%4]}
+                />
                 }
               >
-
+               
               <List.Item.Meta
-                avatar={<Avatar src='https://joeschmoe.io/api/v1/random' />}
-                title={<Link to={'/article/'+ item.id} >{item.title}</Link>}
-                description={item.description}
+                avatar={<Avatar src={this.state.avatars[index%5]} />}
+                title={<Link to={'/article/'+ item.id} 
+                            style={{
+                                overflow: 'hidden',
+                                textOverflow:'ellipsis',
+                                display:'-webkit-box',
+                                WebkitLineClamp:'1',
+                                webkitBoxOrient:'vertical',
+                                  }}>{item.title}</Link>}
+                description={<span  style={{
+                                      overflow: 'hidden',
+                                      textOverflow:'ellipsis',
+                                      display:'-webkit-box',
+                                      WebkitLineClamp:'1',
+                                      webkitBoxOrient:'vertical',
+                     }}>{item.description}</span>}
               />
-
-              {/* 文本多行省略号 */}
-                <p className="Text" 
-                    style={{
-                       overflow: 'hidden',
-                       textOverflow:'ellipsis',
-                       display:'-webkit-box',
-                       WebkitLineClamp:'1',
-                       webkitBoxOrient:'vertical',
-                          }}>
-            
-                </p>
-
+              
               </List.Item>
             )}/>
+            
       </div>
       
     

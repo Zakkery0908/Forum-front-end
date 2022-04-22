@@ -85,7 +85,7 @@ export default class create extends Component {
       <Layout>
         <br />
         <br />
-        <h1 className="head"><span>创 作 中 心</span></h1>
+        <h1 className="head"><span>Writing Center</span></h1>
         <br />
         <br />
         <br />
@@ -96,19 +96,19 @@ export default class create extends Component {
           <Form.Item
             name="title"
             label="Title">
-            <Input />
+            <Input style={{marginLeft:'-100px'}}/>
           </Form.Item>
 
 
           <Form.Item
             name="description"
             label="Description" >
-            <Input />
+            <Input style={{marginLeft:'-100px'}}/>
           </Form.Item>
 
 
           <Form.Item name="major" label="Major">
-            <Cascader
+            <Cascader style={{marginLeft:'-100px'}}
               options={[
                 {
                   value: 'SAT',
@@ -139,10 +139,13 @@ export default class create extends Component {
                   rows={35}
                   onChange={changeContent}
                   onPressEnter={changeContent}
-                  placeholder="文章内容" />
+                  style={{marginLeft:'-100px'}}
+                  placeholder="Content" />
               </Col>
               <Col span={12}>
-                <div className='show-html' dangerouslySetInnerHTML={{ __html: this.state.markdownContent }}  ></div>
+                
+                <div className='show-html' style={{marginLeft:'-100px'}}dangerouslySetInnerHTML={{ __html: this.state.markdownContent }} defaultValue="显示内容" >
+                </div>
 
 
               </Col>
@@ -155,7 +158,7 @@ export default class create extends Component {
 
           <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
 
-            <Dragger {...props}>
+            <Dragger style={{marginLeft:'-100px'}} {...props}>
               <p className="ant-upload-drag-icon">
                 <InboxOutlined />
               </p>
@@ -166,7 +169,7 @@ export default class create extends Component {
               </p>
             </Dragger>
 
-            <Button type="primary" htmlType="submit">
+            <Button style={{marginLeft:'-100px'}} type="primary" htmlType="submit">
               Submit
             </Button>
           </Form.Item>

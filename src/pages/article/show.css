@@ -64,4 +64,8 @@ font-weight:bold;
     background-color: #f8f8f8;
 }
 
+.likecollect:hover{
+    cursor: pointer;
+}
+
 
