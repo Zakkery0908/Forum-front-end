@@ -12,7 +12,8 @@ import {
     UserOutlined
    
 } from '@ant-design/icons';
-import { getContent, reqSearchItems } from '../../api';
+import {  reqSearchItems } from '../../api';
+import storageUtils from "../../utils/storageUtils";
 const {Search} = Input;
 const {confirm} = Modal
 /*
@@ -37,10 +38,10 @@ class Header extends Component {
     handleSearch = async (value)=>{
             
         console.log("keyword: "+value)
-
+        const user = storageUtils.getUser();
         if(value!==''){
             
-            let result = await reqSearchItems(value)
+            let result = await reqSearchItems(value,user.id)
             console.log(result.data)
             
             if (result.code === 200) {

@@ -61,7 +61,7 @@ class Nav extends Component {
           {React.createElement(this.state.collapsed ? MenuUnfoldOutlined : MenuFoldOutlined)}
         </Button>
         <Menu
-          defaultSelectedKeys={['1']}
+          
           defaultOpenKeys={['sub1']}
           mode="inline"
           theme="light"

@@ -35,9 +35,10 @@ export default class article extends Component {
     isLiked: null,
     collect: null,
     iscollect: null,
-    allComment: []
+    allComment: [],
+  
   };
-
+ 
   handleSubmit = async (values) => {
     if (!this.state.value) {
       return;
@@ -46,8 +47,8 @@ export default class article extends Component {
     console.log(this.state.value)
     console.log(this.state.postId)
 
+  
     const user = storageUtils.getUser();
-
     console.log(user.id)
     //还有一个功能是 传输输入的值到后台 this.
     const comment = this.state.value;
@@ -79,7 +80,9 @@ export default class article extends Component {
 
 
   componentWillMount() {
+    const user = storageUtils.getUser();
     console.log("测试redux里的comments")
+    console.log(user.id)
     console.log(this.props.comments)
 
     const postId = this.props.match.params.postId;
@@ -94,12 +97,13 @@ export default class article extends Component {
     }).catch(error => {
       console.log("获取评论失败了")
     })
-
-    ReqPost(postId).then(response => {
+    
+    ReqPost(postId,user.id).then(response => {
       console.log("测试请求文章的信息");
       console.log(response.code);
       const postInfo1 = response.data[0];
       const postInfo2 = response.data[1];
+      this.setState({isLiked:postInfo1.is_like,iscollect:postInfo1.is_collected})
       const date = new Date(postInfo1.post_time);
       let Y = date.getFullYear() + '-';
       let M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-';
@@ -144,7 +148,7 @@ export default class article extends Component {
       const postId = this.state.postId;
       const user = storageUtils.getUser();
       const userId = user.id;
-      const isLiked = this.state.isLiked;
+      
       console.log("下面是userid")
       console.log(userId);
       //点赞功能: 这个接口作用是把postId和userId传给服务器,说明这篇文章点赞过了或者是取消点赞了,然后对应的设置点赞数量
@@ -154,29 +158,27 @@ export default class article extends Component {
       console.log("下面是返回的数据");
       console.log(result);
       if (result.code === 200) {
-        if(this.state.isLiked==='like'){
+        if(result.data==='true'){
         message.success('取消点赞')
       }else{message.success('点赞成功')}
       } else {
         message.error('点赞失败')
       }
       //从后台获取like
-      if (isLiked) {
-        if (isLiked === 'like') {
-          this.setState({ isLiked: null, like: this.state.like - 1 })
-        } else {
-          this.setState({ isLiked: 'like', like: this.state.like + 1 })
-        }
-      }
-      else { this.setState({ isLiked: 'like', like: this.state.like + 1 }) }
-
-
+      // if (isLiked) {
+        if (result.data === 'true') {
+           this.setState({ isLiked:'true' ,like: this.state.like + 1 })
+          } else if( result.data ==='false'){
+           this.setState({ isLiked:'false',like: this.state.like-1})
+         }
+      // }
+      // else { this.setState({ isLiked: 'like', like: this.state.like + 1 }) }
     };
 
     const collectArticle = async () => {
       const postId = this.state.postId;
       const user = storageUtils.getUser();
-      const iscollect = this.state.iscollect;
+    
       console.log("下面是userid")
       console.log(user.id);
       //点赞功能: 这个接口作用是把postId和userId传给服务器,说明这篇文章点赞过了或者是取消点赞了,然后对应的设置点赞数量
@@ -192,16 +194,19 @@ export default class article extends Component {
         message.error('收藏失败')
       }
       //从后台获取like
-      if (iscollect) {
-        if (iscollect === 'collect') {
-          this.setState({ iscollect: null, collect: this.state.collect - 1 })
-        } else {
-          this.setState({ iscollect: 'collect', collect: this.state.collect + 1 })
-        }
+     
+      if (result.data === 'true') {
+        this.setState({ iscollect:'true' ,collect: this.state.collect + 1 })
+       } else if( result.data ==='false'){
+        this.setState({ iscollect:'false',collect: this.state.collect-1})
       }
-      else { this.setState({ iscollect: 'collect', collect: this.state.collect + 1 }) }
+        
+        
+        }
+      // }
+      // else { this.setState({ iscollect: 'collect', collect: this.state.collect + 1 }) }
 
-    };
+  
     const { submitting, value } = this.state;
     const postInfo1 = this.state.postInfo1;
     const postInfo2 = this.state.postInfo2;
@@ -227,13 +232,14 @@ export default class article extends Component {
                    <div className='likecollect'>
                    <div onClick={thumbArticle} style={{fontSize:'20px',display:'inline'}}>
                       {
-                       this.state.isLiked === 'like' ? '💖' :'🖤'
+                       this.state.isLiked === 'true' ? '💖' :'🖤'
+                       //this.state.emoji
                       }{this.state.like}   
                     </div>
                    
                     <div onClick={collectArticle} style={{fontSize:'20px',display:'inline'}}>
                        {
-                       this.state.iscollect === 'collect' ? '🎇':'★'
+                       this.state.iscollect === 'true' ? '🎇':'★'
                          }{this.state.collect}
                          </div>
                         </div>

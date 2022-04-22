@@ -4,7 +4,7 @@ import { MessageOutlined, LikeOutlined, StarOutlined } from '@ant-design/icons';
 import React, { Component } from 'react'
 import PubSub from 'pubsub-js';
 import './index.css'
-import {getContent, reqSearchItems} from '../../api/index'
+import {getContent} from '../../api/index'
 import { Link } from 'react-router-dom';
 import { Calendar } from 'antd';
 import img1 from '../../img/img4.png'
@@ -17,6 +17,7 @@ import ava3 from '../../img/avatar3.svg'
 import ava4 from '../../img/avatar4.svg'
 import ava5 from '../../img/avatar5.svg'
 import {reverse} from '../../api/reverse' 
+import storageUtils from "../../utils/storageUtils";
 
 //封装图标样式
 const IconText = ({ icon, text }) => (
@@ -71,7 +72,8 @@ state = {
 //获取List
   getContent = async ()=>{
       const amount =100;
-      let result = await getContent(amount)
+      const user = storageUtils.getUser();
+      let result = await getContent(amount,user.id)
       this.setState({pages:reverse(result.data),isSearch:false,keyWord:""})
       console.log(this.state)
       
@@ -216,7 +218,7 @@ state = {
           
       
 
-          <Card className="Campus-website" style={{ width: 350,fontSize:'17px',borderRadius:'20px',marginTop:'25px'}}>
+          <Card title='Campus-website' className="Campus-website" style={{ width: 350,fontSize:'17px',borderRadius:'20px',marginTop:'25px'}}>
           <p className='link1'>< a href="https://www.learningmall.cn/">LearningMall</ a></p >
           <p className='link2'>< a href="https://ebridge.xjtlu.edu.cn/urd/sits.urd/run/siw_lgn">XJTLU e-bridge</ a></p >
           <p className='link3'>< a href="https://lib.xjtlu.edu.cn/">Home| Library for XJTLU</ a></p >

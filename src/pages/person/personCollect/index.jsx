@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { List, Avatar, Space,Layout,Button,message} from 'antd';
+import { List, Avatar, Space,Layout} from 'antd';
 import { MessageOutlined, LikeOutlined, StarOutlined } from '@ant-design/icons';
 import {ReqPost} from '../../../api/index'
 import { Link } from 'react-router-dom';
@@ -12,7 +12,7 @@ import ava2 from '../../../img/avatar2.svg'
 import ava3 from '../../../img/avatar3.svg'
 import ava4 from '../../../img/avatar4.svg'
 import ava5 from '../../../img/avatar5.svg'
-
+import storageUtils from "../../../utils/storageUtils";
 const IconText = ({ icon, text }) => (
         <Space>
           {React.createElement(icon)}
@@ -45,12 +45,12 @@ export default class personCollect extends Component {
         //获取路由传入的state参数
         const {collectList} = this.props.location.state
         console.log(collectList)
-
+        const user = storageUtils.getUser();
 
         //遍历点赞列表，通过id获取文章内容，并更新state
         collectList.map( async (postId) => {
          
-          ReqPost(postId).then(response => {
+          ReqPost(postId,user.id).then(response => {
            
             const postInfo1 = response.data[0];
             this.setState({
@@ -93,7 +93,7 @@ export default class personCollect extends Component {
               onChange: page => {
                 console.log(page);
               },
-              pageSize: 6,
+              pageSize: 4,
             }}
 
             style={{marginLeft:'20px',width:'825px',

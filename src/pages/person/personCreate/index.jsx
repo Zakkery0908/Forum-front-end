@@ -12,7 +12,7 @@ import ava2 from '../../../img/avatar2.svg'
 import ava3 from '../../../img/avatar3.svg'
 import ava4 from '../../../img/avatar4.svg'
 import ava5 from '../../../img/avatar5.svg'
-
+import storageUtils from "../../../utils/storageUtils";
 
 const IconText = ({ icon, text }) => (
         <Space>
@@ -47,11 +47,11 @@ export default class personCreate extends Component {
         const {createList} = this.props.location.state
         console.log(createList)
       
-
+        const user = storageUtils.getUser();
         //遍历点赞列表，通过id获取文章内容，并更新state
         createList.map( async (postId) => {
          
-          ReqPost(postId).then(response => {
+          ReqPost(postId,user.id).then(response => {
            
             const postInfo1 = response.data[0];
             this.setState({
