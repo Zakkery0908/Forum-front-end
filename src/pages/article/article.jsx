@@ -3,7 +3,6 @@ import { getComment, ReqPost, thumbArticleOne, thumbArticleTwo, collectOne, coll
 import './article.less';
 import './show.css';
 import { Comment, Avatar, Form, Button, List, Input, message } from 'antd';
-import { HeartFilled, HeartOutlined, StarFilled, StarOutlined } from '@ant-design/icons';
 import storageUtils from "../../utils/storageUtils";
 
 
@@ -222,21 +221,21 @@ export default class article extends Component {
                   {this.state.postInfo1.title}
                 </span>
                 <div className="topic-title-info">
-                  <span>发布于:  {this.state.postInfo1.post_time}     </span><br />
-                  <span>作者:   {this.state.postInfo2.username}</span>
+                  <span>Publish time:  {this.state.postInfo1.post_time}     </span><br />
+                  <span>Author:   {this.state.postInfo2.username}</span>
                   {/* 点赞功能:这里是调用点赞功能的地方 */}
                    <div className='likecollect'>
-                   <span onClick={thumbArticle} style={{fontSize:'20px'}}>
+                   <div onClick={thumbArticle} style={{fontSize:'20px',display:'inline'}}>
                       {
                        this.state.isLiked === 'like' ? '💖' :'🖤'
-                      }{this.state.like}
-                    </span>
-
-                    <span onClick={collectArticle} style={{fontSize:'20px'}}>
+                      }{this.state.like}   
+                    </div>
+                   
+                    <div onClick={collectArticle} style={{fontSize:'20px',display:'inline'}}>
                        {
                        this.state.iscollect === 'collect' ? '🎇':'★'
                          }{this.state.collect}
-                         </span>
+                         </div>
                         </div>
                 </div>
                 <br/>

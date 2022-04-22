@@ -74,15 +74,15 @@ class Nav extends Component {
           </Menu.Item>
 
           <Menu.Item key="2" icon={<HeartOutlined />} onClick={value => this.getPerson(value)}>
-          <Link to={{pathname:'/person/personLike',state:{likeList:this.state.likeList}}}> <span>Liked articles</span></Link> 
+          <Link to={{pathname:'/person/personLike',state:{likeList:this.state.likeList}}}> <span>Liked posts</span></Link> 
           </Menu.Item>
 
           <Menu.Item key="3"icon={<BulbOutlined />} onClick={value => this.getPerson(value)}>
-          <Link to={{pathname:'/person/personCreate', state:{createList:this.state.createList}}}><span>Created articles</span></Link> 
+          <Link to={{pathname:'/person/personCreate', state:{createList:this.state.createList}}}><span>Published posts</span></Link> 
           </Menu.Item>
 
           <Menu.Item key="4"icon={<BulbOutlined />} onClick={value => this.getPerson(value)}>
-          <Link to={{pathname:'/person/personCollect', state:{collectList:this.state.collectList}}}><span>Collected articles</span></Link> 
+          <Link to={{pathname:'/person/personCollect', state:{collectList:this.state.collectList}}}><span>Favorited posts</span></Link> 
           </Menu.Item>
         </Menu>
       </div>

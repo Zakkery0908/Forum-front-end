@@ -56,7 +56,7 @@ export default class personCreate extends Component {
            
             const postInfo1 = response.data[0];
             this.setState({
-              postList: [...this.state.postList, postInfo1]
+              postList: [postInfo1,...this.state.postList]
           })
           }).catch(error => {
             console.log("出错了")

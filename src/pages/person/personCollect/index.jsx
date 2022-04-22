@@ -13,7 +13,6 @@ import ava3 from '../../../img/avatar3.svg'
 import ava4 from '../../../img/avatar4.svg'
 import ava5 from '../../../img/avatar5.svg'
 
-
 const IconText = ({ icon, text }) => (
         <Space>
           {React.createElement(icon)}
@@ -56,7 +55,7 @@ export default class personCollect extends Component {
            
             const postInfo1 = response.data[0];
             this.setState({
-              postList: [...this.state.postList, postInfo1]
+              postList: [postInfo1, ...this.state.postList]
           })
           }).catch(error => {
             console.log("出错了")

@@ -30,7 +30,7 @@ export default class personData extends Component {
 
           <Card.Grid style={gridStyle}>    
           <Col span={25}>
-          <Statistic title="Number of collections" 
+          <Statistic title="Number of favorites" 
                value={1314} 
                prefix={<StarOutlined />} />
           </Col>

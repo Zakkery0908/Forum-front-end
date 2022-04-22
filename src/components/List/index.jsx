@@ -5,7 +5,6 @@ import React, { Component } from 'react'
 import PubSub from 'pubsub-js';
 import './index.css'
 import {getContent, reqSearchItems} from '../../api/index'
-import testdata from '../../Test/testdata.json'
 import { Link } from 'react-router-dom';
 import { Calendar } from 'antd';
 import img1 from '../../img/img4.png'
@@ -17,6 +16,7 @@ import ava2 from '../../img/avatar2.svg'
 import ava3 from '../../img/avatar3.svg'
 import ava4 from '../../img/avatar4.svg'
 import ava5 from '../../img/avatar5.svg'
+import {reverse} from '../../api/reverse' 
 
 //封装图标样式
 const IconText = ({ icon, text }) => (
@@ -25,7 +25,6 @@ const IconText = ({ icon, text }) => (
     {text}
   </Space>
 );
- 
 
 export default class List1 extends Component {
   handleClick = (value, key) => {
@@ -62,11 +61,13 @@ state = {
   ]
 }
 
+
+
 //获取List
   getContent = async ()=>{
       const amount =100;
       let result = await getContent(amount)
-      this.setState({pages:result.data,isSearch:false,keyWord:""})
+      this.setState({pages:reverse(result.data),isSearch:false,keyWord:""})
       console.log(this.state)
       
       if (result.code === 200) {
@@ -202,16 +203,19 @@ state = {
       )}/>
 
       <div className="site-calendar-demo-card">
+        <Card className='calender'>
           <Calendar fullscreen={false}
                      />
+    </Card>
           
-          <div>
-          <Card title="Campus-website" style={{ width: 350,fontSize:'16px',borderRadius:'20px',marginTop:'20px'}}>
+      
+
+          <Card className="Campus-website" style={{ width: 350,fontSize:'16px',borderRadius:'20px',marginTop:'20px'}}>
           <p className='link1'>< a href="https://www.learningmall.cn/">LearningMall</ a></p >
           <p className='link2'>< a href="https://ebridge.xjtlu.edu.cn/urd/sits.urd/run/siw_lgn">XJTLU e-bridge</ a></p >
           <p className='link3'>< a href="https://lib.xjtlu.edu.cn/">Home| Library for XJTLU</ a></p >
           </Card>
-        </div>
+     
       </div>
 
       
