@@ -82,7 +82,7 @@ class Nav extends Component {
           </Menu.Item>
 
           <Menu.Item key="4"icon={<BulbOutlined />} onClick={value => this.getPerson(value)}>
-          <Link to={{pathname:'/person/personCollect', state:{collectList:this.state.collectList}}}><span>Favorited posts</span></Link> 
+          <Link to={{pathname:'/person/personCollect', state:{collectList:this.state.collectList}}}><span>Favorites</span></Link> 
           </Menu.Item>
         </Menu>
       </div>

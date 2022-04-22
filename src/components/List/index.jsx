@@ -210,7 +210,7 @@ state = {
           
       
 
-          <Card className="Campus-website" style={{ width: 350,fontSize:'16px',borderRadius:'20px',marginTop:'20px'}}>
+          <Card className="Campus-website" style={{ width: 350,fontSize:'17px',borderRadius:'20px',marginTop:'25px'}}>
           <p className='link1'>< a href="https://www.learningmall.cn/">LearningMall</ a></p >
           <p className='link2'>< a href="https://ebridge.xjtlu.edu.cn/urd/sits.urd/run/siw_lgn">XJTLU e-bridge</ a></p >
           <p className='link3'>< a href="https://lib.xjtlu.edu.cn/">Home| Library for XJTLU</ a></p >

@@ -45,7 +45,6 @@ export default class personCreate extends Component {
   componentDidMount(){
         //获取路由传入的state参数
         const {createList} = this.props.location.state
-        console.log("!!!!likeid:")
         console.log(createList)
       
 
@@ -71,8 +70,6 @@ export default class personCreate extends Component {
   render() {
 
     const postList = this.state.postList
-
-    console.log("!!!!!!!!!!我的状态：：：：")
     console.log(this.state)
     
     
@@ -86,7 +83,7 @@ export default class personCreate extends Component {
                       marginTop:'15px',
                       fontSize:'15px'
                     }}>
-            { "My Creations"}
+            { "My Published Posts"}
           </h1>
           <br/>
 

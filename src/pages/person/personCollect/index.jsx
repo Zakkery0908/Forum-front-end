@@ -44,7 +44,6 @@ export default class personCollect extends Component {
   componentDidMount(){
         //获取路由传入的state参数
         const {collectList} = this.props.location.state
-        console.log("!!!!likeid:")
         console.log(collectList)
 
 
@@ -70,7 +69,6 @@ export default class personCollect extends Component {
     const postList = this.state.postList
     console.log("测试postList")
     
-    console.log("!!!!!!!!!!我的状态：：：：")
     console.log(this.state)
     
     
