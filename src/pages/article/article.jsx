@@ -158,7 +158,7 @@ export default class article extends Component {
       console.log("下面是返回的数据");
       console.log(result);
       if (result.code === 200) {
-        if(result.data==='true'){
+        if(result.data==='false'){
         message.success('取消点赞')
       }else{message.success('点赞成功')}
       } else {
@@ -187,7 +187,7 @@ export default class article extends Component {
       //result只包含msg(即json数据)
       console.log(result);
       if (result.code === 200) {
-        if(this.state.iscollect==='collect'){
+        if(result.data==='false'){
           message.success('取消收藏')
         }else{message.success('收藏成功')}
       } else {

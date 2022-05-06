@@ -90,7 +90,10 @@ class Header extends Component {
                             enterButton
                             className='header-search'/> </div>
          </Menu.Item>
-         <Menu.Item key="6" style={{
+         <Menu.Item key="6">
+         <span className='webName'>TEST Online Learning Content Sharing Platform</span>
+         </Menu.Item>
+         <Menu.Item key="7" style={{
                     height: '40px',
                     width:'120px',
                     lineHeight: '250%',
@@ -102,11 +105,12 @@ class Header extends Component {
                     textAlign:'center'
 
                 }} onClick={this.logout}>
+                 
                     <LogoutOutlined />
                     log out
                 </Menu.Item>
 
-                <span className='webName'>XJTLU Online Learning Content Sharing Platform</span>
+                
       </Menu>
 
       
