@@ -229,11 +229,11 @@ class Login extends React.Component {
                 <Form
                     name="normal_login"
                     className="login-form"
-                    initialValues={{
-                        remember: true,
-                        username: 'root',
-                        password: '123456'
-                    }}
+                    // initialValues={{
+                    //     remember: true,
+                    //     username: 'root',
+                    //     password: '123456'
+                    // }}
                     onFinish={onFinish}
                 >
                     <Form.Item

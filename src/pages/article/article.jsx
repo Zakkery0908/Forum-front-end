@@ -2,9 +2,11 @@ import React, { Component } from 'react'
 import { getComment, ReqPost, thumbArticleOne, thumbArticleTwo, collectOne, collectTwo, sendComment } from '../../api/index';
 import './article.less';
 import './show.css';
-import { Comment, Avatar, Form, Button, List, Input, message } from 'antd';
+import { Comment, Avatar, Form, Button, List, Input, message, Modal, Col, Row, Layout } from 'antd';
 import storageUtils from "../../utils/storageUtils";
-
+import { marked } from 'marked'
+import { editBlog,ReqCreate} from '../../api/index'
+import { highlight } from 'highlight.js'
 
 
 const { TextArea } = Input;
@@ -36,7 +38,10 @@ export default class article extends Component {
     collect: null,
     iscollect: null,
     allComment: [],
-  
+    authorId:'',
+    
+    visible: false,
+    
   };
  
   handleSubmit = async (values) => {
@@ -103,7 +108,9 @@ export default class article extends Component {
       console.log(response.code);
       const postInfo1 = response.data[0];
       const postInfo2 = response.data[1];
-      this.setState({isLiked:postInfo1.is_like,iscollect:postInfo1.is_collected})
+
+      this.setState({isLiked:postInfo1.is_like,iscollect:postInfo1.is_collected, authorId:postInfo1.author_id})
+
       const date = new Date(postInfo1.post_time);
       let Y = date.getFullYear() + '-';
       let M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-';
@@ -112,6 +119,7 @@ export default class article extends Component {
       let m = date.getMinutes() + ':';
       let s = date.getSeconds();
       postInfo1.post_time = Y + M + D + h + m + s
+
       this.setState({ postInfo1, postInfo2 });
     }).catch(error => {
       console.log("出错了")
@@ -136,8 +144,6 @@ export default class article extends Component {
     }).catch(error => { console.log("收藏更新失败") })
 
   }
-
-
 
 
 
@@ -211,9 +217,61 @@ export default class article extends Component {
     const postInfo1 = this.state.postInfo1;
     const postInfo2 = this.state.postInfo2;
     const postId = this.state.postId;
+    
+    const authorId = this.state.authorId;
+    const user = storageUtils.getUser();
+    const userId = user.id;
+
+
     console.log("测试获取的postId和postInfo")
     console.log(postId);
     console.log(postInfo1);
+    console.log('作者的id:');
+    console.log(authorId);
+
+
+    marked.setOptions({
+      renderer: new marked.Renderer(),
+      highlight: function (code, lang) {
+        const hljs = require(highlight);
+        const language = hljs.getLanguage(lang) ? lang : 'plaintext';
+        return hljs.highlight(code, { language }).value;
+      },
+      langPrefix: 'hljs language-', // highlight.js css expects a top-level 'hljs' class.
+      pedantic: false,
+      gfm: true,
+      breaks: false,
+      sanitize: false,
+      smartLists: true,
+      smartypants: false,
+      xhtml: false
+    });
+
+    const changeContent = (e) => {
+      this.setState({ articleContent: e.target.value })
+      let html = marked(e.target.value)
+      console.log("测试markddown")
+      console.log(html)
+      this.setState({ markdownContent: html })
+    }
+
+    const onFinish = async (values) => {
+      const { title, description } = values
+      //修改的地方
+      const content = this.state.markdownContent
+      const user = storageUtils.getUser()
+      const author_id = user.id
+      const blog_id = this.state.postId
+      // let result = await ReqCreate(title, description, content, author_id)
+      let result = await editBlog(blog_id, title, description, content )
+      if (result.code === 200) {
+        message.success('更新成功')
+      } else {
+        message.error('出了一点问题')
+      }
+    };
+ 
+    
     return (
       <div>
         <span>
@@ -253,10 +311,85 @@ export default class article extends Component {
                 //这里显示内容
                 className="topic-content"
                 dangerouslySetInnerHTML={{ __html: this.state.postInfo1.content }}
-              />
+              />    
             </div>
           </div>
         </span>
+      
+        
+        {/* 编辑模态框 */}
+        <Modal
+          title={'Edit Blog'} 
+          width={1000}
+          visible={this.state.visible} //visible 判断是否显示模态框 (true | false)
+          onCancel={()=>{this.setState({visible: false})}}
+          footer={null}
+        >
+        
+            <Form className='formitem' name="nest-messages" labelAlign='left' onFinish={onFinish}
+                  initialValues={
+                    {
+                      title: this.state.postInfo1.title,
+                      description: this.state.postInfo1.description,
+                      content: this.state.postInfo1.content
+                      //初始化表单默认值（原帖子内容）
+                      //defalutValue会报错，需要用initialValue
+
+                      //TextArea的initialValue如何显示去掉标签的内容？？？
+                      //<div dangerouslySetInnerHTML={{ __html: this.state.postInfo1.content }}/> 显示不了
+                      //另外TextArea的部分不可未修改就提交，但是前两个input可以？？？？？？
+                      //（只修改title或者description，不修改content，submit不成功。全部不修改submit不成功。只修改content不修改前两个可以成功）
+                    }}                                   
+                 style={{marginLeft:'10px'}} >
+              <div>Title</div>
+              <Form.Item name="title">
+              <Input style={{width:'800px'}}/>
+              </Form.Item>
+
+              <div>Description</div>
+              <Form.Item name="description">
+              <Input style={{width:'800px'}}/>
+              </Form.Item>
+              
+              <div>Content</div>
+              <Form.Item name="content">                
+                <TextArea
+                  className="markdown-content"
+                  rows={20}
+                  onChange={changeContent}
+                  onPressEnter={changeContent}
+                  placeholder="Content" />
+              </Form.Item>
+
+              <Form.Item>
+              <Button type="primary" htmlType="submit">
+                Submit
+              </Button>
+
+              </Form.Item>
+            </Form>
+          
+
+
+
+        
+        </Modal>
+        
+
+        {/* 编辑按钮 */}
+        {authorId===userId?
+        <Button className='edit'
+                style={{backgroundColor: '#382173',
+                        color:'#FFFFFF',
+                        marginTop:'10px',
+                        width:'60px'}} 
+                onClick={()=>{this.setState({visible: true})}}
+                >edit</Button> :
+        <Button disabled
+                style={{marginTop:'10px',
+                        width:'60px'}}>edit
+        </Button>}
+
         {/* 评论展示区 */}
         <List
           className="comment-list"

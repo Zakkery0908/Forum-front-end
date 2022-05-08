@@ -36,6 +36,7 @@ export default class create extends Component {
       console.log(html)
       this.setState({ markdownContent: html })
     }
+
     const { Dragger } = Upload;
 
     const props = {
@@ -81,6 +82,7 @@ export default class create extends Component {
         message.error('出了一点问题')
       }
     };
+    
     return (
       <Layout>
         <br />
@@ -90,9 +92,8 @@ export default class create extends Component {
         <br />
         <br />
         <br />
+
         <Form {...layout} className='formitem' name="nest-messages" labelAlign='left' onFinish={onFinish} >
-
-
           <Form.Item
             name="title"
             label="Title">
@@ -131,6 +132,8 @@ export default class create extends Component {
               ]}
             />
           </Form.Item>
+
+
           <Form.Item name="content" label="Content">
             <Row gutter={2}>
               <Col span={12}>
@@ -155,7 +158,6 @@ export default class create extends Component {
             </Row>
           </Form.Item>
 
-
           <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}>
 
             <Dragger style={{marginLeft:'-100px'}} {...props}>
@@ -172,6 +174,7 @@ export default class create extends Component {
             <Button style={{marginLeft:'-100px'}} type="primary" htmlType="submit">
               Submit
             </Button>
+
           </Form.Item>
         </Form>
       </Layout>

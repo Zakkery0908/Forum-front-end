@@ -24,3 +24,6 @@ export const reqSearchItems = (keyword,user_id) => ajax(BASE + '/keyWords', {   
 export const collectOne = (blog_id, user_id) => ajax(BASE + '/user/collectOne', { blog_id, user_id }, 'POST')
 export const collectTwo = (blog_id) => ajax(BASE + '/user/collectTwo', { blog_id }, 'POST')
 export const getPerson = (author_id) => ajax(BASE + '/user/getPerson', { author_id })
+
+export const editBlog = (blog_id, title, description, content) => ajax(BASE + '/editBlog', { 
+    blog_id, title, description, content })
