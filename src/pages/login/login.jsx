@@ -311,7 +311,7 @@ class Login extends React.Component {
                     okText='😊'
                     cancelText='back'
                     okButtonProps={{ disabled: true }}
-                >R
+                >
                     <div style={{display: 'flex'}}>
                         {Register()}
                     </div>

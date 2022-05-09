@@ -337,6 +337,8 @@ export default class article extends Component {
 
                       //TextArea的initialValue如何显示去掉标签的内容？？？
                       //<div dangerouslySetInnerHTML={{ __html: this.state.postInfo1.content }}/> 显示不了
+
+                      
                       //另外TextArea的部分不可未修改就提交，但是前两个input可以？？？？？？
                       //（只修改title或者description，不修改content，submit不成功。全部不修改submit不成功。只修改content不修改前两个可以成功）
                     }}                                   

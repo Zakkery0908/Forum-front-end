@@ -1,12 +1,15 @@
 //用来写的是个人页面组件
+//密码修改逻辑;
+//
 import { Card, Avatar, Descriptions,Col,Statistic,Row,Tag} from 'antd';
 import { Layout, Button, message } from 'antd';
 import { MessageOutlined, LikeOutlined,EditOutlined, EllipsisOutlined, SettingOutlined,TwitterOutlined,
   YoutubeOutlined,UserOutlined,SkinOutlined,MailOutlined,CrownOutlined,
   FacebookOutlined,
   LinkedinOutlined,} from '@ant-design/icons';
+
 import React, { Component } from 'react'
-import {getPerson} from '../../api/index'
+import {getPerson,editProfile} from '../../api/index'
 import './person.css'
 import Nav from '../../components/Nav/Nav'
 import storageUtils from "../../utils/storageUtils"
@@ -15,6 +18,7 @@ import PersonData from "./personData"
 import PersonLike from "./personLike"
 import PersonCollect from "./personCollect"
 import PersonCreate from "./personCreate"
+import {Form, Input, Checkbox, Modal} from 'antd';
 
 
 const { Header, Footer, Sider, Content } = Layout;
@@ -39,12 +43,15 @@ export default class person extends Component {
  //redux主要是负责状态变换  点赞机制：redux
 
   state = {
+    author_id:"",
+    show: 0,
     username:"",
     grade:"",
     gender:"",
     major:"",
     email:"",
     postList:[]
+
   }
 
 
@@ -71,18 +78,169 @@ export default class person extends Component {
   }
 }
 
-
-
-
-
-
 componentDidMount(){
-  this.getPerson1()
+  this.getPerson1();
 }
 
- 
+hideEditForm = () => {
+  this.setState({
+      show: 0
+  })
+}
 
   render() {
+    const layout = {
+      labelCol: {
+          span: 8,
+      },
+      wrapperCol: {
+          span: 12,
+      },
+  };
+
+  const validateMessages = {
+    required: 'it is required!',
+    types: {
+        email: 'it is not a valid email!',
+        number: 'it is not a valid number!',
+    },
+    number: {
+        range: 'it must be between range and',
+    },
+};
+
+    const edit = () => {
+      const onFinish = async (values) => {
+          const {username, password, email, major,gender,grade} = values
+          const user = storageUtils.getUser();
+          const id = user.id;
+          let result = await editProfile(id,username, password, email, major,gender,grade)
+          console.log(result)
+          if (result.code === 200) {
+              message.success('编辑成功')
+          } else {
+              message.error('编辑失败')
+          }
+          this.setState({show: 0})
+      };
+
+      return (
+          <Form {...layout} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages}
+                style={{width: '100%'}} >
+
+
+              <Form.Item
+                  name='username'
+                  label="username"
+                  rules={[
+                      {
+                          required: true,
+                      },
+                  ]}
+              >
+                  <Input/>
+              </Form.Item>
+
+
+              <Form.Item
+                  name='password'
+                  label="password"
+                  rules={[
+                      {required: true, message: 'password is required!'},
+                      {pattern: /^[a-zA-Z0-9_]+$/, message: 'the passcode must be alphabet, number or "_"'}
+                  ]}
+              >
+               <Input/>
+              </Form.Item>
+              
+              
+              <Form.Item
+                  name='passwordCheck'
+                  label="password check"
+                  dependencies={['password']}
+                  rules={[
+                      {required: true, message: 'password is required!'},
+                      {pattern: /^[a-zA-Z0-9_]+$/, message: 'the passcode must be English words, integer or "_"'},
+                      ({getFieldValue}) => ({
+                          validator(_, value) {
+                              if (!value || getFieldValue('password') === value) {
+                                  return Promise.resolve();
+                              }
+                              return Promise.reject(new Error('The two passwords that you entered do not match!'));
+                          },
+                      }),
+                  ]}
+              >
+                  <Input/>
+              </Form.Item>
+
+
+              <Form.Item
+                  name='email'
+                  label="email"
+                  rules={[
+                      {
+                          type: 'email',
+                          required: true,
+
+                      },
+                  ]}
+              >
+                  
+                  <Input onChange={(e) => this.setState({email: e.target.value})}/>
+              </Form.Item>
+
+
+              
+
+
+              <Form.Item
+                  name='major'
+                  label="major"
+                  rules={[
+                      {
+                          required: true,
+                      },
+                  ]}
+              >
+                  <Input/>
+              </Form.Item>
+
+              <Form.Item
+                  name='gender'
+                  label="gender"
+                  rules={[
+                      {
+                          required: true,
+                      },
+                  ]}
+              >
+                  <Input/>
+              </Form.Item>
+
+
+              <Form.Item
+                  name='grade'
+                  label="grade"
+                  rules={[
+                      {
+                          required: true,
+                      },
+                  ]}
+              >
+                  <Input/>
+              </Form.Item>
+              
+              <Form.Item wrapperCol={{...layout.wrapperCol, offset: 8}}>
+                  <Button type="ghost" htmlType="submit">
+                      submit
+                  </Button>
+              </Form.Item>
+          </Form>
+      );
+  };
+
+
     return (
         <Layout>
        
@@ -109,7 +267,27 @@ componentDidMount(){
     <Tag icon={<LinkedinOutlined />} color="#55acee" style={{width:'80px'}}>
       LinkedIn
     </Tag>
+      
+    <Button type="primary" ghost="true" onClick={() => this.setState({show: 1})}>
+                            Edit
+                        </Button>
             </Card>
+            {/* 模态窗 */}
+            <Modal
+                    title="Edit"
+                    visible={this.state.show === 1}
+                    onOk={this.sendOrder}
+                    onCancel={this.hideEditForm}
+                    okText='😊'
+                    cancelText='back'
+                    okButtonProps={{ disabled: true }}
+                >
+                    <div style={{display: 'flex'}}>
+                        {edit()}
+                    </div>
+                </Modal>
+
+
         </div>
     
 

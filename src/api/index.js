@@ -27,3 +27,7 @@ export const getPerson = (author_id) => ajax(BASE + '/user/getPerson', { author_
 
 export const editBlog = (blog_id, title, description, content) => ajax(BASE + '/editBlog', { 
     blog_id, title, description, content })
+
+export const editProfile = (id,username, email, major, gender, grade) => ajax(BASE + '/user/editProfile', {id,
+        username, email, major, gender, grade
+    }, 'POST')
