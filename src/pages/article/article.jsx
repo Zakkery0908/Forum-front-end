@@ -256,14 +256,21 @@ export default class article extends Component {
     }
 
     const onFinish = async (values) => {
-      const { title, description } = values
+      const { title, description,content } = values
       //修改的地方
-      const content = this.state.markdownContent
+      //const content = this.state.markdownContent
+      let html = marked(content)
+      console.log("测试markddown")
+      console.log(html)
+      this.setState({ markdownContent: html })
+      const Content =this.state.markdownContent
       const user = storageUtils.getUser()
       const author_id = user.id
-      const blog_id = this.state.postId
+      const id = this.state.postId
       // let result = await ReqCreate(title, description, content, author_id)
-      let result = await editBlog(blog_id, title, description, content )
+      let result = await editBlog(id, title, description, Content )
+      console.log("test edit")
+      console.log(result)
       if (result.code === 200) {
         message.success('更新成功')
       } else {
@@ -339,7 +346,7 @@ export default class article extends Component {
                       //<div dangerouslySetInnerHTML={{ __html: this.state.postInfo1.content }}/> 显示不了
 
                       
-                      //另外TextArea的部分不可未修改就提交，但是前两个input可以？？？？？？
+                      // 另外TextArea的部分不可未修改就提交，但是前两个input可以？？？？？？
                       //（只修改title或者description，不修改content，submit不成功。全部不修改submit不成功。只修改content不修改前两个可以成功）
                     }}                                   
                  style={{marginLeft:'10px'}} >
@@ -359,7 +366,7 @@ export default class article extends Component {
                   className="markdown-content"
                   rows={20}
                   onChange={changeContent}
-                  onPressEnter={changeContent}
+                 // onPressEnter={changeContent}
                   placeholder="Content" />
               </Form.Item>
 

@@ -18,14 +18,7 @@ class Login extends React.Component {
         email: '',
        
     }
-    getVerifyCode = async () => {
-        const reg = /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/;
-        const {email} = this.state
-        if (!reg.test(email)) {
-            return
-        }
-        console.log(email)
-    }
+   
     hideRegisterForm = () => {
         this.setState({
             show: 0
@@ -68,7 +61,7 @@ class Login extends React.Component {
             const onFinish = async (values) => {
                 const {username, password, email, major,gender,grade} = values
                 let result = await reqAddUser(username, password, email, major,gender,grade)
-                console.log(result)
+                //console.log(result)
                 if (result.code === 200) {
                     message.success('注册成功')
                 } else {
@@ -212,7 +205,7 @@ class Login extends React.Component {
 // 返回登录界面
         const LoginForm = () => {
             const onFinish = async (values) => {
-                console.log('Received values of form: ', values)
+                
                 //调用login，把值传递给login
                 this.props.login(values.username, values.password)
                 if (values.remember) {
@@ -229,11 +222,11 @@ class Login extends React.Component {
                 <Form
                     name="normal_login"
                     className="login-form"
-                    // initialValues={{
-                    //     remember: true,
-                    //     username: 'root',
-                    //     password: '123456'
-                    // }}
+                    initialValues={{
+                        remember: true,
+                        username: 'root',
+                        password: '123456'
+                    }}
                     onFinish={onFinish}
                 >
                     <Form.Item

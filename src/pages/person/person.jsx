@@ -111,10 +111,10 @@ hideEditForm = () => {
 
     const edit = () => {
       const onFinish = async (values) => {
-          const {username, password, email, major,gender,grade} = values
+          const {username, email, major,gender,grade} = values
           const user = storageUtils.getUser();
           const id = user.id;
-          let result = await editProfile(id,username, password, email, major,gender,grade)
+          let result = await editProfile(id,username, email, major,gender,grade)
           console.log(result)
           if (result.code === 200) {
               message.success('编辑成功')
@@ -126,53 +126,23 @@ hideEditForm = () => {
 
       return (
           <Form {...layout} name="nest-messages" onFinish={onFinish} validateMessages={validateMessages}
-                style={{width: '100%'}} >
+                style={{width: '100%'}} 
+                initialValues={{
+                    username:this.state.username,
+                    email:this.state.email,
+                    major:this.state.major,
+                    gender:this.state.gender,
+                    grade:this.state.grade,
+                    }}>
 
 
               <Form.Item
                   name='username'
                   label="username"
-                  rules={[
-                      {
-                          required: true,
-                      },
-                  ]}
               >
-                  <Input/>
+                  <Input />
               </Form.Item>
 
-
-              <Form.Item
-                  name='password'
-                  label="password"
-                  rules={[
-                      {required: true, message: 'password is required!'},
-                      {pattern: /^[a-zA-Z0-9_]+$/, message: 'the passcode must be alphabet, number or "_"'}
-                  ]}
-              >
-               <Input/>
-              </Form.Item>
-              
-              
-              <Form.Item
-                  name='passwordCheck'
-                  label="password check"
-                  dependencies={['password']}
-                  rules={[
-                      {required: true, message: 'password is required!'},
-                      {pattern: /^[a-zA-Z0-9_]+$/, message: 'the passcode must be English words, integer or "_"'},
-                      ({getFieldValue}) => ({
-                          validator(_, value) {
-                              if (!value || getFieldValue('password') === value) {
-                                  return Promise.resolve();
-                              }
-                              return Promise.reject(new Error('The two passwords that you entered do not match!'));
-                          },
-                      }),
-                  ]}
-              >
-                  <Input/>
-              </Form.Item>
 
 
               <Form.Item
@@ -181,27 +151,18 @@ hideEditForm = () => {
                   rules={[
                       {
                           type: 'email',
-                          required: true,
 
                       },
                   ]}
               >
                   
-                  <Input onChange={(e) => this.setState({email: e.target.value})}/>
+                  <Input />
               </Form.Item>
-
-
-              
 
 
               <Form.Item
                   name='major'
                   label="major"
-                  rules={[
-                      {
-                          required: true,
-                      },
-                  ]}
               >
                   <Input/>
               </Form.Item>
@@ -209,11 +170,6 @@ hideEditForm = () => {
               <Form.Item
                   name='gender'
                   label="gender"
-                  rules={[
-                      {
-                          required: true,
-                      },
-                  ]}
               >
                   <Input/>
               </Form.Item>
@@ -222,11 +178,7 @@ hideEditForm = () => {
               <Form.Item
                   name='grade'
                   label="grade"
-                  rules={[
-                      {
-                          required: true,
-                      },
-                  ]}
+
               >
                   <Input/>
               </Form.Item>
@@ -246,7 +198,7 @@ hideEditForm = () => {
        
         <div className="site-card-border-less-wrapper">
         <Card  title={ <div className='card-title'>Personal information</div>} 
-                bordered={false} theme="dark" style={{ width: 300, background:'#FFFFFFC7'}}>
+                bordered={false} theme="dark" style={{ width: 350, background:'#FFFFFFC7'}}>
             <Meta
             avatar={<Avatar style={{width:'50px',height:'50px'}} src="https://joeschmoe.io/api/v1/random" />} 
             />
@@ -268,7 +220,7 @@ hideEditForm = () => {
       LinkedIn
     </Tag>
       
-    <Button type="primary" ghost="true" onClick={() => this.setState({show: 1})}>
+    <Button type="primary" ghost="true" onClick={() => this.setState({show: 1})} style={{width:'80px'}}>
                             Edit
                         </Button>
             </Card>

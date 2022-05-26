@@ -55,6 +55,6 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://124.221.214.9:8089",
+  "proxy": "http://124.221.214.9:8081",
   "homepage": "."
 }
